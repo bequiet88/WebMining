@@ -1,6 +1,62 @@
+
+# eclipse #
+/.classpath
+/.project
+
 *.class
 
 # Package Files #
 *.jar
 *.war
 *.ear
+*~
+
+# sbt #
+/project/target/
+/project/project/target
+
+# Maven #
+
+.settings/
+*.iml
+*.iws
+log/
+target/
+
+# LateX Files #
+*.acn
+*.acr
+*.alg
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.fdb_latexmk
+*.glg
+*.glo
+*.gls
+*.idx
+*.ilg
+*.ind
+*.ist
+*.lof
+*.log
+*.lot
+*.maf
+*.mtc
+*.mtc0
+*.nav
+*.nlo
+*.out
+*.pdfsync
+*.ps
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+*.xdy
+*.tdo
+*.DS_Store
+.DS_Store
+
+

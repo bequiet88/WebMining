@@ -19,6 +19,12 @@
 \usepackage{algorithm}
 \usepackage{algorithmic}
 
+%this package adds " " after commands, allows us a nicer
+%formatting of texts
+\usepackage{xspace}
+\newcommand{\sss}{\ss\xspace}
+
+
 % well, when your work is concerned with definitions, proposition and so on, we suggest this
 % feel free to add Corrolary, Theorem or whatever you need
 \newtheorem{definition}{Definition}
@@ -71,7 +77,7 @@
    {Student  Project\\}
    \vspace{2cm}
    {presented by\\
-    Jochen H\"{u}l\ss  \&  Matthias Rabus \\
+    Jochen H\"{u}l\sss  \&  Matthias Rabus \\
     Matriculation Number 1376749 \& 1207834 \\
    }
    \vspace{1cm} 
@@ -105,7 +111,6 @@
 
 \chapter{Project Outline}
 \section{What is the problem you are solving?}
-\label{cha:problem}
 
 The project originates from a classical text mining problem. Generally speaking, we would like to deal with the question whether or not Natural Language Processing (NLP) tools are able to extract and correctly classify certain events in a given text. More specifically, our intention is machine-reading written reports on Premier League football matches. The particular event we are looking into is the scoring of a goal. At first sight, this appears rather straightforward, but by taking into account that there are numerous or even infinite ways to express that a team marks a goal, the difficulty to find as many of them as possible is challenging. Thus, a classification of text snippets based on manually found patterns indicating a goal is needed. Furthermore, we would like to enhance our search result by using learning algorithms.  
 
@@ -117,7 +122,7 @@ Since many NLP tools work best with English language, we would like to increase 
 			
 \section{How will you solve the problem?}
 \subsection{Crawling}
-As mentioned above we need a crawler to gather data. “Web crawlers, also known as spiders or robots, are programs that automatically download Web pages.[...] A crawler can visit many sites to collect information that can be analyzed and mined in a central location, either online (as it is downloaded) or off-line (after it is stored).” (Liu, 2007, p.311) In our case the crawler should start at the overview page of all games played in the current season. The element tree of the game pages are identically constructed so it should be possible for a crawler to find the element named article within the tree and extract its content while removing additional HTML tags. Each report should be saved in a separate file. 
+As mentioned above we need a crawler to gather data. “Web crawlers, also known as spiders or robots, are programs that automatically download Web pages.[...] A crawler can visit many sites to collect information that can be analyzed and mined in a central location, either online (as it is downloaded) or offline (after it is stored).” (Liu, 2007, p.311) In our case the crawler should start at the overview page of all games played in the current season. The element tree of the game pages are identically constructed so it should be possible for a crawler to find the element named article within the tree and extract its content while removing additional HTML tags. Each report should be saved in a separate file. 
 
 \subsection{Seeds and patterns}
 At first we have to figure out a certain amount of sentences which describe a scored goal. These sentences are so called seeds. 

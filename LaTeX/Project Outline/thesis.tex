@@ -22,7 +22,7 @@
 %this package adds " " after commands, allows us a nicer
 %formatting of texts
 \usepackage{xspace}
-
+\usepackage[colorlinks = false, pdfborder={0 0 0}]{hyperref}
 
 % well, when your work is concerned with definitions, proposition and so on, we suggest this
 % feel free to add Corrolary, Theorem or whatever you need
@@ -117,11 +117,11 @@ While looking for goals in football match reports, we are omitting the detection
 
 \section{What data will you use? Where will you get it? How will you gather it?}
 
-Since many NLP tools work best with English language, we would like to increase our chance of success by using football reports from England’s Premier League. The BBC sports department offers match reports for every game of the currently ongoing season 2012/2013. The amount of reports is sufficient because after 32 matchdays exactly 32 * 10 = 320 reports are available. The number of reports is even growing until the end of the season. Our first project step is gathering the data from the BBC homepage. Therefore we have to develop a crawler which crawls the results pages of the premier league and accesses every game report. A sample data set can be found on http://www.bbc.co.uk/sport/0/football/21992293.		
+Since many NLP tools work best with English language, we would like to increase our chance of success by using football reports from England’s Premier League. The BBC sports department offers match reports for every game of the currently ongoing season 2012/2013. The amount of reports is sufficient because after 32 matchdays exactly 32 * 10 = 320 reports are available. The number of reports is even growing until the end of the season. Our first project step is gathering the data from the BBC homepage. Therefore we have to develop a crawler which crawls the results pages of the premier league and accesses every game report. A sample data set can be found on \href{http://www.bbc.co.uk/sport/0/football/21992293}{http://www.bbc.co.uk/sport/0/football/21992293}.		
 			
 \section{How will you solve the problem?}
 \subsection{Crawling}
-As mentioned above we need a crawler to gather data. “Web crawlers, also known as spiders or robots, are programs that automatically download Web pages.[...] A crawler can visit many sites to collect information that can be analyzed and mined in a central location, either online (as it is downloaded) or offline (after it is stored).” (Liu, 2007, p.311) In our case the crawler should start at the overview page of all games played in the current season. The element tree of the game pages are identically constructed so it should be possible for a crawler to find the element named article within the tree and extract its content while removing additional HTML tags. Each report should be saved in a separate file. 
+As mentioned above we need a crawler to gather data. “Web crawlers, also known as spiders or robots, are programs that automatically download Web pages.[...] A crawler can visit many sites to collect information that can be analyzed and mined in a central location, either online (as it is downloaded) or offline (after it is stored).” (\cite{Liu2007}, p.311) In our case the crawler should start at the overview page of all games played in the current season. The element tree of the game pages are identically constructed so it should be possible for a crawler to find the element named article within the tree and extract its content while removing additional HTML tags. Each report should be saved in a separate file. 
 
 \subsection{Seeds and patterns}
 At first we have to figure out a certain amount of sentences which describe a scored goal. These sentences are so called seeds. 
@@ -136,7 +136,8 @@ Both sets, the set including goals and the one without goals will build up our t
 
 \section{How will you evaluate, measure success?}
 
-We will measure success two-dimensionally. The first dimension is the measurement of two metrics, namely precision and recall. Where “precision p is the number of correctly classified positive examples divided by the total number of examples that are classified as positive. Recall r is the number of correctly classified positive examples divided by the total number of actual positive examples in the test set.” (Liu, 2007, p.103). These figures are taken for iterations all along the way of improving our search results. At least we would like to record precision and recall before and after the application of the learning algorithm. Ideally, we will be able to obtain intermediate results as well. Subsequently, the second dimension is determining a trend of the direction whereto the development of precision and results leads while the learning algorithm is applied.
+We will measure success two-dimensionally. The first dimension is the measurement of two metrics, namely precision and recall. Where “precision p is the number of correctly classified positive examples divided by the total number of examples that are classified as positive. Recall r is the number of correctly classified positive examples divided by the total number of actual positive examples in the test set.” (\cite{Liu2007}, p.103) These figures are taken for iterations all along the way of improving our search results. At least we would like to record precision and recall before and after the application of the learning algorithm. Ideally, we will be able to obtain intermediate results as well. Subsequently, the second dimension is determining a trend of the direction whereto the development of precision and results leads while the learning algorithm is applied.
 
-
+\bibliographystyle{plain}
+\bibliography{bibliography}
 \end{document}

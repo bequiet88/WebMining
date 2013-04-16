@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<process version="5.3.007">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="5.3.007" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="text:process_document_from_file" compatibility="5.3.000" expanded="true" height="76" name="Process Documents from Files" width="90" x="246" y="75">
+        <list key="text_directories">
+          <parameter key="bbc2" value="D:\data_server\eclipse\WebMining\RapidMiner\crawls\bbc_041513_2"/>
+        </list>
+        <parameter key="file_pattern" value="*"/>
+        <parameter key="extract_text_only" value="false"/>
+        <parameter key="use_file_extension_as_type" value="true"/>
+        <parameter key="content_type" value="html"/>
+        <parameter key="encoding" value="SYSTEM"/>
+        <parameter key="create_word_vector" value="false"/>
+        <parameter key="vector_creation" value="TF-IDF"/>
+        <parameter key="add_meta_information" value="true"/>
+        <parameter key="keep_text" value="false"/>
+        <parameter key="prune_method" value="none"/>
+        <parameter key="prunde_below_percent" value="3.0"/>
+        <parameter key="prune_above_percent" value="30.0"/>
+        <parameter key="prune_below_rank" value="0.05"/>
+        <parameter key="prune_above_rank" value="0.95"/>
+        <parameter key="datamanagement" value="double_sparse_array"/>
+        <process expanded="true">
+          <operator activated="true" class="text:extract_information" compatibility="5.3.000" expanded="true" height="60" name="Extract Information" width="90" x="313" y="120">
+            <parameter key="query_type" value="XPath"/>
+            <list key="string_machting_queries"/>
+            <parameter key="attribute_type" value="Nominal"/>
+            <list key="regular_expression_queries"/>
+            <list key="regular_region_queries"/>
+            <list key="xpath_queries">
+              <parameter key="textElements" value="//h:p"/>
+            </list>
+            <list key="namespaces"/>
+            <parameter key="ignore_CDATA" value="true"/>
+            <parameter key="assume_html" value="true"/>
+            <list key="index_queries"/>
+          </operator>
+          <connect from_port="document" to_op="Extract Information" to_port="document"/>
+          <connect from_op="Extract Information" from_port="document" to_port="document 1"/>
+          <portSpacing port="source_document" spacing="0"/>
+          <portSpacing port="sink_document 1" spacing="0"/>
+          <portSpacing port="sink_document 2" spacing="0"/>
+        </process>
+      </operator>
+      <connect from_op="Process Documents from Files" from_port="example set" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+    </process>
+  </operator>
+</process>

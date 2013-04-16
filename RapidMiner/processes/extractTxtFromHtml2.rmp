@@ -1,31 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<process version="5.3.007">
+<process version="5.3.005">
   <context>
     <input/>
     <output/>
     <macros/>
   </context>
-  <operator activated="true" class="process" compatibility="5.3.007" expanded="true" name="Process">
+  <operator activated="true" class="process" compatibility="5.3.005" expanded="true" name="Process">
     <parameter key="logverbosity" value="init"/>
+    <parameter key="resultfile" value="D:\data_server\rapidminer\out\out.res"/>
     <parameter key="random_seed" value="2001"/>
     <parameter key="send_mail" value="never"/>
     <parameter key="notification_email" value=""/>
     <parameter key="process_duration_for_mail" value="30"/>
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
-      <operator activated="true" class="text:process_document_from_file" compatibility="5.3.000" expanded="true" height="76" name="Process Documents from Files" width="90" x="246" y="75">
+      <operator activated="true" class="text:process_document_from_file" compatibility="5.3.000" expanded="true" height="76" name="Process Documents from Files" width="90" x="45" y="75">
         <list key="text_directories">
-          <parameter key="bbc2" value="D:\data_server\eclipse\WebMining\RapidMiner\crawls\bbc_041513_2"/>
+          <parameter key="crawl" value="D:\data_server\eclipse\WebMining\RapidMiner\crawls\bbc_041513_2"/>
         </list>
         <parameter key="file_pattern" value="*"/>
         <parameter key="extract_text_only" value="false"/>
         <parameter key="use_file_extension_as_type" value="true"/>
-        <parameter key="content_type" value="html"/>
+        <parameter key="content_type" value="txt"/>
         <parameter key="encoding" value="SYSTEM"/>
         <parameter key="create_word_vector" value="false"/>
         <parameter key="vector_creation" value="TF-IDF"/>
-        <parameter key="add_meta_information" value="true"/>
-        <parameter key="keep_text" value="false"/>
+        <parameter key="add_meta_information" value="false"/>
+        <parameter key="keep_text" value="true"/>
         <parameter key="prune_method" value="none"/>
         <parameter key="prunde_below_percent" value="3.0"/>
         <parameter key="prune_above_percent" value="30.0"/>
@@ -33,22 +34,35 @@
         <parameter key="prune_above_rank" value="0.95"/>
         <parameter key="datamanagement" value="double_sparse_array"/>
         <process expanded="true">
-          <operator activated="true" class="text:extract_information" compatibility="5.3.000" expanded="true" height="60" name="Extract Information" width="90" x="313" y="120">
+          <operator activated="true" class="text:cut_document" compatibility="5.3.000" expanded="true" height="60" name="Cut Document" width="90" x="112" y="120">
             <parameter key="query_type" value="XPath"/>
             <list key="string_machting_queries"/>
             <parameter key="attribute_type" value="Nominal"/>
             <list key="regular_expression_queries"/>
             <list key="regular_region_queries"/>
             <list key="xpath_queries">
-              <parameter key="textElements" value="//h:p"/>
+              <parameter key="report" value="//h:div[@class='article']/h:p/text()"/>
             </list>
             <list key="namespaces"/>
             <parameter key="ignore_CDATA" value="true"/>
             <parameter key="assume_html" value="true"/>
             <list key="index_queries"/>
+            <process expanded="true">
+              <connect from_port="segment" to_port="document 1"/>
+              <portSpacing port="source_segment" spacing="0"/>
+              <portSpacing port="sink_document 1" spacing="0"/>
+              <portSpacing port="sink_document 2" spacing="0"/>
+            </process>
           </operator>
-          <connect from_port="document" to_op="Extract Information" to_port="document"/>
-          <connect from_op="Extract Information" from_port="document" to_port="document 1"/>
+          <operator activated="true" class="text:combine_documents" compatibility="5.3.000" expanded="true" height="76" name="Combine Documents" width="90" x="246" y="120"/>
+          <operator activated="true" class="write_as_text" compatibility="5.3.005" expanded="true" height="76" name="Write as Text" width="90" x="380" y="120">
+            <parameter key="result_file" value="D:\data_server\eclipse\WebMining\RapidMiner\crawls\bbc_041513_3\result.txt"/>
+            <parameter key="encoding" value="SYSTEM"/>
+          </operator>
+          <connect from_port="document" to_op="Cut Document" to_port="document"/>
+          <connect from_op="Cut Document" from_port="documents" to_op="Combine Documents" to_port="documents 1"/>
+          <connect from_op="Combine Documents" from_port="document" to_op="Write as Text" to_port="input 1"/>
+          <connect from_op="Write as Text" from_port="input 1" to_port="document 1"/>
           <portSpacing port="source_document" spacing="0"/>
           <portSpacing port="sink_document 1" spacing="0"/>
           <portSpacing port="sink_document 2" spacing="0"/>

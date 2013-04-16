@@ -116,26 +116,26 @@ The project originates from a classical text mining problem. Generally speaking,
 
 While looking for goals in football match reports, we are omitting the detection of team that scored as well as the unique recognition of a goal as many reports refer multiple times to the same goal.
 
-\section{What data will you use? Where will you get it? How will you gather it?}
+\section{What data will you use? Where will you get it from? How will you gather it?}
 
-Since many NLP tools work best with English language, we would like to increase our chance of success by using football reports from England’s Premier League. The BBC sports department offers match reports for every game of the currently ongoing season 2012/2013. The amount of reports is sufficient because after 32 matchdays exactly 32 * 10 = 320 reports are available. The number of reports is even growing until the end of the season. Our first project step is gathering the data from the BBC homepage. Therefore we have to develop a crawler which crawls the results pages of the premier league and accesses every game report. A sample data set can be found on \href{http://www.bbc.co.uk/sport/0/football/21992293}{http://www.bbc.co.uk/sport/0/football/21992293}.		
+Since many NLP tools work best with English language, we would like to increase our chance of success by using football reports from England's Premier League. The BBC sports department offers match reports for every game of the currently ongoing season 2012/2013. The amount of reports is sufficient because after 32 matchdays exactly 32 * 10 = 320 reports are available. The number of reports is even growing until the end of the season. Our first project step is gathering the data from the BBC homepage. Therefore, we have to develop a crawler which crawls Premier League's result page and accesses each game report. A sample data set can be found on \href{http://www.bbc.co.uk/sport/0/football/21992293}{http://www.bbc.co.uk/sport/0/football/21992293}.		
 			
 \section{How will you solve the problem?}
 \subsection{Crawling}
 As mentioned above we need a crawler to gather data. ``Web crawlers, also known as spiders or robots, are programs that automatically download Web pages.[...] A crawler can visit many sites to collect information that can be analyzed and mined in a central location, either online (as it is downloaded) or offline (after it is stored).'' \citep[p.311]{Liu2007} In our case the crawler should start at the overview page of all games played in the current season. The element tree of the game pages are identically constructed so it should be possible for a crawler to find the element named article within the tree and extract its content while removing additional HTML tags. Each report should be saved in a separate file. 
 
-\subsection{Seeds and patterns}
+\subsection{Seeds and Patterns}
 At first we have to figure out a certain amount of sentences which describe a scored goal. These sentences are so called seeds. 
-From this seeds we can infer certain patterns, e.g. from the sentence “Sigurdsson scored a late equaliser for Tottenham “ we can infer the pattern $NamedEntity scored .* $NOUN. 
+From this seeds we can infer certain patterns, e.g. from the sentence ``Sigurdsson scored a late equaliser for Tottenham'' we can infer the pattern \$NamedEntity scored .* \$NOUN. 
 
-There are several methods applicable to construct such patterns. Named Entity Recognition (NER) labels asequences of words in a text which are the names of things, in our application football clubs, players and coaches. The Stanford Natural Language Processing Group offers a Java software library including a Named Entity Recognizer. The Stanford Core NLP offers another useful tool for pattern detection: the POS-Tagger. POS stands for part of speech, so a POS-Tagger categorizes each word as a part of speech depending on the word and the context. Both tools will be helpful to detect patterns.
-After extracting patterns from some samples, we apply them to the data we have. Therefore you could, for example, use the tool RapidMiner. The created set of sentences will then be used to learn new patterns. The  repetition of pattern learning and its application to data is called learning.
+There are several methods applicable to construct such patterns. Named Entity Recognition (NER) labels a sequence of words in a text which are names of things, in our application domain, these are football clubs, players, and coaches. The Stanford Natural Language Processing Group offers a Java software library including a Named Entity Recognizer. Their NLP library provides another useful tool for pattern detection: the POS-Tagger. POS stands for part of speech, so a POS-Tagger categorizes each word as a part of speech depending on the word and the context. Both tools will be helpful to detect patterns.
+After extracting patterns from some samples, we apply them to the data we have. Therefore RapidMiner can be used. We apply them to the complete data set. The created set of sentences will then be used to learn new patterns. The repetition of pattern learning and its application to data is called learning.
 
 \subsection{Training and Machine-Learning}
-To improve the effect of machine learning we have to create a second set of sentences which don’t describe goals but have a similar structure. 
+To improve the effect of machine learning we have to create a second set of sentences which do not describe goals but have a similar structure. 
 Both sets, the set including goals and the one without goals will build up our training set. The training set will be used to train a classifier, e.g. a Naive Bayes classifier. Then the data will be classified and the results will be evaluated.
 
-\section{How will you evaluate, measure success?}
+\section{How will you evaluate and measure success?}
 
 We will measure success two-dimensionally. The first dimension is the measurement of two metrics, namely precision and recall. Where ``precision p is the number of correctly classified positive examples divided by the total number of examples that are classified as positive. Recall r is the number of correctly classified positive examples divided by the total number of actual positive examples in the test set.'' \citep[p.103]{Liu2007} These figures are taken for iterations all along the way of improving our search results. At least we would like to record precision and recall before and after the application of the learning algorithm. Ideally, we will be able to obtain intermediate results as well. Subsequently, the second dimension is determining a trend of the direction whereto the development of precision and results leads while the learning algorithm is applied.
 

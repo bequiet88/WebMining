@@ -16,7 +16,7 @@
     <process expanded="true">
       <operator activated="true" class="text:process_document_from_file" compatibility="5.3.000" expanded="true" height="76" name="Process Documents from Files" width="90" x="45" y="75">
         <list key="text_directories">
-          <parameter key="crawl" value="D:\data_server\eclipse\WebMining\RapidMiner\crawls\bbc_041513_2"/>
+          <parameter key="crawl" value="/Users/matthiasr/Documents/Web Mining Project/WebMining/RapidMiner/crawls/bbc_041513_2"/>
         </list>
         <parameter key="file_pattern" value="*"/>
         <parameter key="extract_text_only" value="false"/>
@@ -41,7 +41,7 @@
             <list key="regular_expression_queries"/>
             <list key="regular_region_queries"/>
             <list key="xpath_queries">
-              <parameter key="report" value="//h:div[@class='article']/h:p/text()"/>
+              <parameter key="report" value="//h:div[@class='article']/h:p/text()|//h:div[@class='article']/h:p/*/text()"/>
             </list>
             <list key="namespaces"/>
             <parameter key="ignore_CDATA" value="true"/>
@@ -56,7 +56,7 @@
           </operator>
           <operator activated="true" class="text:combine_documents" compatibility="5.3.000" expanded="true" height="76" name="Combine Documents" width="90" x="246" y="120"/>
           <operator activated="true" class="write_as_text" compatibility="5.3.005" expanded="true" height="76" name="Write as Text" width="90" x="380" y="120">
-            <parameter key="result_file" value="D:\data_server\eclipse\WebMining\RapidMiner\crawls\bbc_041513_3\result.txt"/>
+            <parameter key="result_file" value="/Users/matthiasr/Documents/Web Mining Project/WebMining/RapidMiner/crawls/bbc_041513_3/results_2.txt"/>
             <parameter key="encoding" value="SYSTEM"/>
           </operator>
           <connect from_port="document" to_op="Cut Document" to_port="document"/>

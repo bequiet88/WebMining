@@ -1,18 +1,23 @@
 INDEX VERSION 1.126+/Users/matthiasr/Documents/Web Mining Project/WebMining/Source/.metadata/.plugins/org.eclipse.jdt.core
+1143318511.index
 4238209716.index
 156905802.index
 852041277.index
 1384487945.index
 1426895347.index
 2892754717.index
+514206604.index
 3302703152.index
 1719589309.index
 1819685514.index
 3058151023.index
+2610572929.index
 3573731767.index
 820667217.index
 2199929143.index
 394959189.index
+667133670.index
+76738821.index
 3266567714.index
 2545238116.index
 3794265932.index
@@ -20,6 +25,12 @@ INDEX VERSION 1.126+/Users/matthiasr/Documents/Web Mining Project/WebMining/Sour
 3321539481.index
 3712507179.index
 1331727162.index
+601156732.index
+1518330038.index
 1131261497.index
 1271342938.index
+3179768028.index
+2828937978.index
+2611151624.index
 1833648217.index
+305631214.index

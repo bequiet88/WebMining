@@ -26,7 +26,7 @@ public class AspectBasedSentimentAnalysis {
 	
 	
 	public AspectBasedSentimentAnalysis() throws IOException{
-		reviews = new PreprocessedReviews("data/reviews.txt");
+		reviews = new PreprocessedReviews("/Users/matthiasr/Documents/Web Mining Project/WebMining/RapidMiner/crawls/results_4.txt");
 		resultWriter = new BufferedWriter ( new FileWriter (new File("data/output.csv")));
 		sentimentLexicon = new SentimentLexicon("data/taboadaAdjectiveSentimentLexicon.txt");
 	}

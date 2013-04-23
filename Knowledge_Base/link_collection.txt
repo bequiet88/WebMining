@@ -14,3 +14,7 @@
 - discriminator(Noun)
 Any of several electronic devices that convert some property of a signal into an amplitude whose value is proportional to the difference between the value of the input signal and that of a standard
 
+- http://www-nlp.stanford.edu/nlp/javadoc/javanlp/
+  Java Doc of NLP
+
+

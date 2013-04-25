@@ -1,0 +1,26 @@
+package contentAnalysis;
+
+import edu.stanford.nlp.process.DocumentPreprocessor;
+
+
+public class Preprocessor {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		try {
+			TextSplitter split = new TextSplitter("/Users/matthiasr/Documents/Web Mining Project/WebMining/RapidMiner/crawls/bbc_041513_3/results_4.txt","/Users/matthiasr/Documents/Web Mining Project/WebMining/RapidMiner/crawls/bbc_041513_3/results_5.txt");
+			String t = split.processTextFile();
+			
+			System.out.println(new DocumentPreprocessor().getSentencesFromText(t));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+}

@@ -10,19 +10,10 @@ import java.util.regex.*;
 
 public class TextSplitter 
 {
-	private String inputFile;
-	private String outputFile;
-	
-	public TextSplitter(String input, String output)
+	public static void processTextFile(String inputFile, String outputFile) throws IOException
 	{
-		this.inputFile = input;		
-		this.outputFile = output;
-	}
-	
-	public void processTextFile() throws IOException
-	{
-	    BufferedReader reader = new BufferedReader(new FileReader (new File(this.inputFile)));
-	    BufferedWriter writer = new BufferedWriter(new FileWriter(new File(this.outputFile)));
+	    BufferedReader reader = new BufferedReader(new FileReader (new File(inputFile)));
+	    BufferedWriter writer = new BufferedWriter(new FileWriter(new File(outputFile)));
 		Pattern p = Pattern.compile("^(0[1-9]|[12][0-9]|3[01])[.](0[1-9]|1[012])[.](19|20)[0-9]{2}$");
 
 	    String text = "";
@@ -53,9 +44,9 @@ public class TextSplitter
 	    writer.close();
 	}
 	
-	public ArrayList<Sentence> splitIntoSentences() throws IOException, Exception
+	public static ArrayList<Sentence> splitIntoSentences(String inputFile) throws IOException, Exception
 	{
-	    List<String> lines = java.nio.file.Files.readAllLines(Paths.get(this.inputFile), Charset.defaultCharset());
+	    List<String> lines = java.nio.file.Files.readAllLines(Paths.get(inputFile), Charset.defaultCharset());
 	    
 	    String text = null;
 	    for(String l : lines)

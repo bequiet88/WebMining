@@ -17,11 +17,4 @@ Any of several electronic devices that convert some property of a signal into an
 - http://www-nlp.stanford.edu/nlp/javadoc/javanlp/
   Java Doc of NLP
 
-- http://code.google.com/p/ngramtools/issues/list
-  Ngram Search Engine Code	
 
-- http://www.cs.princeton.edu/~rs/AlgsDS07/21PatternMatching.pdf
-paper about efficient text matching
-
-- http://code.google.com/p/ngramtools/source/checkout
-Tools for searching and lexical knowledge acquisition from Google N-grams

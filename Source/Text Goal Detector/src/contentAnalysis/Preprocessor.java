@@ -10,11 +10,8 @@ public class Preprocessor {
 	public static void main(String[] args) {
 		try 
 		{
-			TextSplitter split = new TextSplitter("/Users/matthiasr/Documents/Web Mining Project/WebMining/RapidMiner/crawls/bbc_041513_3/results_3.txt","/Users/matthiasr/Documents/Web Mining Project/WebMining/RapidMiner/crawls/bbc_041513_3/results_7.txt");
-			split.processTextFile();
-			
-			split = new TextSplitter("/Users/matthiasr/Documents/Web Mining Project/WebMining/RapidMiner/crawls/bbc_041513_3/results_7.txt", "/Users/matthiasr/Documents/Web Mining Project/WebMining/RapidMiner/crawls/bbc_041513_3/results_8.txt");
-			ArrayList<Sentence> sentences = split.splitIntoSentences();
+			TextSplitter.processTextFile("/Users/matthiasr/Documents/Web Mining Project/WebMining/RapidMiner/crawls/bbc_041513_3/results_3.txt","/Users/matthiasr/Documents/Web Mining Project/WebMining/RapidMiner/crawls/bbc_041513_3/results_7.txt");
+			ArrayList<Sentence> sentences = TextSplitter.splitIntoSentences("/Users/matthiasr/Documents/Web Mining Project/WebMining/RapidMiner/crawls/bbc_041513_3/results_7.txt");
 			
 			for(Sentence s : sentences)
 			{

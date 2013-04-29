@@ -24,4 +24,7 @@ Any of several electronic devices that convert some property of a signal into an
 paper about efficient text matching
 
 - http://code.google.com/p/ngramtools/source/checkout
-Tools for searching and lexical knowledge acquisition from Google N-grams
+  Tools for searching and lexical knowledge acquisition from Google N-grams
+
+- http://www.readncode.com/blog/how-to-do-a-git-merge-with-vim/
+  git mergetool -vimdiff 

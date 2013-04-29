@@ -1,0 +1,59 @@
+
+PMID- 20868467
+OWN - NLM
+STAT- PubMed-not-MEDLINE
+DA  - 20101014
+DCOM- 20110714
+LR  - 20111121
+IS  - 2041-1480 (Electronic)
+VI  - 1
+IP  - 1
+DP  - 2010
+TI  - Simple tricks for improving pattern-based information extraction from the
+      biomedical literature.
+PG  - 9
+LID - 10.1186/2041-1480-1-9 [doi]
+AB  - BACKGROUND: Pattern-based approaches to relation extraction have shown very good 
+      results in many areas of biomedical text mining. However, defining the right set 
+      of patterns is difficult; approaches are either manual, incurring high cost, or
+      automatic, often resulting in large sets of noisy patterns. RESULTS: We propose
+      several techniques for filtering sets of automatically generated patterns and
+      analyze their effectiveness for different extraction tasks, as defined in the
+      recent BioNLP 2009 shared task. We focus on simple methods that only take into
+      account the complexity of the pattern and the complexity of the texts the
+      patterns are applied to. We show that our techniques, despite their simplicity,
+      yield large improvements in all tasks we analyzed. For instance, they raise the
+      F-score for the task of extraction gene expression events from 24.8% to 51.9%.
+      CONCLUSIONS: Already very simple filtering techniques may improve the F-score of 
+      an information extraction method based on automatically generated patterns
+      significantly. Furthermore, the application of such methods yields a considerable
+      speed-up, as fewer matches need to be analysed. Due to their simplicity, the
+      proposed filtering techniques also should be applicable to other methods using
+      linguistic patterns for information extraction.
+AD  - Knowledge Management in Bioinformatics, Department for Computer Science,
+      Humboldt-Universitat zu Berlin, Germany. leser@informatik.hu-berlin.de.
+FAU - Nguyen, Quang Long
+AU  - Nguyen QL
+FAU - Tikk, Domonkos
+AU  - Tikk D
+FAU - Leser, Ulf
+AU  - Leser U
+LA  - eng
+PT  - Journal Article
+DEP - 20100924
+PL  - England
+TA  - J Biomed Semantics
+JT  - Journal of biomedical semantics
+JID - 101531992
+PMC - PMC2955645
+OID - NLM: PMC2955645
+EDAT- 2010/09/28 06:00
+MHDA- 2010/09/28 06:01
+CRDT- 2010/09/28 06:00
+PHST- 2010/03/30 [received]
+PHST- 2010/09/24 [accepted]
+PHST- 2010/09/24 [aheadofprint]
+AID - 2041-1480-1-9 [pii]
+AID - 10.1186/2041-1480-1-9 [doi]
+PST - epublish
+SO  - J Biomed Semantics. 2010 Sep 24;1(1):9. doi: 10.1186/2041-1480-1-9.

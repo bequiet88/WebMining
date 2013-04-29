@@ -1,0 +1,43 @@
+[PERSON prevented *] 
+
+[ORGANIZATION prevented *]
+
+[* RB undermined] 
+
+[* save IN PERSON]
+
+[PERSON cleared PERSON POS NN]
+
+[luckless PERSON]
+
+[ORGANIZATION * suffered]
+
+[PERSON * suffered]
+
+[PERSON dived]
+
+[PERSON * unable]
+
+[ORGANIZATION * unable]
+
+[VB lost DT game]
+
+[DT JJ disappointment]
+
+[JJ chance]
+
+[ORGANIZATION recovered]
+
+[saved IN ORGANIZATION POS PERSON]
+
+[saved IN PERSON]
+
+[NN struggeld * half]
+
+[frustration]
+
+[NN limitation]
+
+[PRP$ NN IN survival]
+
+[JJ clearance IN PERSON]

@@ -1,0 +1,46 @@
+[PERSON scored *]
+
+[ORGANIZATION scored *]
+
+[PERSON opened DT scoring]
+
+[ORGANIZATION opened DT scoring]
+
+[PERSON POS * NN IN * corner]
+
+[PERSON VB * PERSON POS pass]
+
+[VB * DT bench * score]
+
+[VB * past * PERSON]
+
+[PERSON VB * again]
+
+[ORGANIZATION VB * again]
+
+[VB * into * net]
+
+[PERSON * VB * corner]
+
+[PERSON * volley]
+
+[ORGANIZATION VB DT lead]
+
+[PERSON VB DT lead]
+
+[ORGANIZATION doubled PKP$ lead]
+
+[ORGANIZATION double DT lead]
+
+[VB * DT goal]
+
+[VB * PRP$ goal]
+
+[PERSON VB * shot]
+
+[VB PERSON POS side * victory]
+
+[VB * twice]
+
+
+

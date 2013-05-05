@@ -15,6 +15,10 @@ import edu.stanford.nlp.ling.CoreAnnotations.TokensAnnotation;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.util.CoreMap;
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
 
 public class Sentence {
 	private String sentence = null;
@@ -142,4 +146,40 @@ public class Sentence {
 	    writer.newLine();
 	    writer.close();
 	}
+
+	public static void writeSentencesToDirectories(ArrayList<Sentence> sentences,String directory) throws IOException
+	{
+		File dir = new File(directory);
+		File posDir = new File(directory + "\\pos");
+		File negDir = new File(directory + "\\neg");
+		if(dir.exists())
+		{
+			posDir.mkdir();
+			negDir.mkdir();
+		}
+		else
+			throw new IOException("Directory doesn't exist");
+		
+		for(int i=1; i <= sentences.size(); i++)
+		{
+			Sentence s = sentences.get(i);
+			
+			String message = "Does this sentence contain a goal? \\n" + s.sentence + "\\n\\n" + "Remaining sentences: " + (sentences.size() - i);
+			if(JOptionPane.showOptionDialog(null, message, "Please decide", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, 
+					null) == JOptionPane.YES_OPTION)
+			{
+			    BufferedWriter writer = new BufferedWriter(new FileWriter(new File(posDir + "\\" + i +".txt"), false));       
+			    writer.write(s.sentence);
+			    writer.close();
+			}
+			else
+			{
+				BufferedWriter writer = new BufferedWriter(new FileWriter(new File(negDir + "\\" + i +".txt"), false));       
+			    writer.write(s.sentence);
+			    writer.close();
+			}
+						
+		}
+	}
+
 }

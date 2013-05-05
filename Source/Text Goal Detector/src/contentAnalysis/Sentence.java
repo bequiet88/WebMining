@@ -67,11 +67,13 @@ public class Sentence {
 			this.goalProbability = goalProbability;
 	}
 
-	public Sentence(String sentence) throws Exception 
+	public Sentence(String sentence, boolean doPreprocessing) throws Exception 
 	{
 		super();
 		this.sentence = sentence;
-		this.processWords();
+		if(doPreprocessing)
+			this.processWords();
+		
 		this.containsGoal = false;
 		this.goalProbability = 0.0;
 	}
@@ -99,11 +101,6 @@ public class Sentence {
 	    	this.namedEntity = new String[sentence.get(TokensAnnotation.class).size()];
 
 	    	int index = 0;
-	
-	    	/*
-	    	 * Iterate over all tokens in sentence, 
-	    	 * put information into two arrays (one for words, one for posTags)
-	    	 */
 	    	for (CoreLabel token: sentence.get(TokensAnnotation.class)) 
 	    	{
 	    		String word = token.get(TextAnnotation.class);  
@@ -150,31 +147,45 @@ public class Sentence {
 	public static void writeSentencesToDirectories(ArrayList<Sentence> sentences,String directory) throws IOException
 	{
 		File dir = new File(directory);
-		File posDir = new File(directory + "\\pos");
-		File negDir = new File(directory + "\\neg");
+		File posDir = new File(directory + "/pos");
+		File negDir = new File(directory + "/neg");
+		File allDir = new File(directory + "/all");
 		if(dir.exists())
 		{
-			posDir.mkdir();
-			negDir.mkdir();
+			if(!posDir.exists())
+				posDir.mkdir();
+			if(!negDir.exists())
+				negDir.mkdir();
+			if(!allDir.exists())
+				allDir.mkdir();
 		}
 		else
 			throw new IOException("Directory doesn't exist");
 		
+		for(int i=1; i < sentences.size(); i++)
+		{
+			Sentence s = sentences.get(i);
+
+		    BufferedWriter writer = new BufferedWriter(new FileWriter(new File(allDir + "/" + i +".txt"), false));       
+		    writer.write(s.sentence);
+		    writer.close();
+		}
+				
 		for(int i=1; i <= sentences.size(); i++)
 		{
 			Sentence s = sentences.get(i);
 			
-			String message = "Does this sentence contain a goal? \\n" + s.sentence + "\\n\\n" + "Remaining sentences: " + (sentences.size() - i);
-			if(JOptionPane.showOptionDialog(null, message, "Please decide", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, 
+			String message = s.sentence;
+			if(JOptionPane.showOptionDialog(null, message, "Remaining sentences: " + (sentences.size() - i) + " Does this sentence contain a goal?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, 
 					null) == JOptionPane.YES_OPTION)
 			{
-			    BufferedWriter writer = new BufferedWriter(new FileWriter(new File(posDir + "\\" + i +".txt"), false));       
+			    BufferedWriter writer = new BufferedWriter(new FileWriter(new File(posDir + "/" + i +".txt"), false));       
 			    writer.write(s.sentence);
 			    writer.close();
 			}
 			else
 			{
-				BufferedWriter writer = new BufferedWriter(new FileWriter(new File(negDir + "\\" + i +".txt"), false));       
+				BufferedWriter writer = new BufferedWriter(new FileWriter(new File(negDir + "/" + i +".txt"), false));       
 			    writer.write(s.sentence);
 			    writer.close();
 			}
@@ -182,4 +193,35 @@ public class Sentence {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((sentence == null) ? 0 : sentence.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Sentence))
+			return false;
+		Sentence other = (Sentence) obj;
+		if (sentence == null) {
+			if (other.sentence != null)
+				return false;
+		} else if (!sentence.equals(other.sentence))
+			return false;
+		return true;
+	}	
 }

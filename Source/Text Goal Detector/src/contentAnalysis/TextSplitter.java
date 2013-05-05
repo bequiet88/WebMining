@@ -44,9 +44,10 @@ public class TextSplitter
 	    writer.close();
 	}
 	
-	public static ArrayList<Sentence> splitIntoSentences(String inputFile) throws IOException, Exception
+	public static ArrayList<Sentence> splitIntoSentences(String inputFile) throws IOException, FileNotFoundException, Exception
 	{
-	    List<String> lines = java.nio.file.Files.readAllLines(Paths.get(inputFile), Charset.defaultCharset());
+	    //List<String> lines = java.nio.file.Files.readAllLines(Paths.get(inputFile), Charset.defaultCharset());
+	    List<String> lines = java.nio.file.Files.readAllLines(Paths.get(inputFile), Charset.forName("UTF-8"));
 	    
 	    String text = null;
 	    for(String l : lines)
@@ -64,7 +65,7 @@ public class TextSplitter
 	        end != BreakIterator.DONE;
 	        start = end, end = iterator.next()) 
 	    {
-	    	sentences.add(new Sentence(text.substring(start,end)));
+	    	sentences.add(new Sentence(text.substring(start,end), true));
 	    }
 	    return sentences;
 	}

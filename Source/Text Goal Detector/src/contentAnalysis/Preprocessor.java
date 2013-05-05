@@ -17,6 +17,8 @@ public class Preprocessor {
 			{
 				s.writeToFile("/Users/matthiasr/Documents/Web Mining Project/WebMining/RapidMiner/crawls/bbc_041513_3/results_9.txt", true);				
 			}
+			
+			Sentence.writeSentencesToDirectories(sentences, null);
 		} 
 		catch (Exception e) 
 		{

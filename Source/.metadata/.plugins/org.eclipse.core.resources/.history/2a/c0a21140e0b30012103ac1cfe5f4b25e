@@ -1,7 +1,0 @@
-package textProcessing
-
-case class Sentence(val sentence: String) 
-{
-	val posTags : List[String]
-	val namedEntity : List[String]
-}

@@ -1,0 +1,26 @@
+package contentAnalysis;
+
+import java.util.ArrayList;
+
+public class Corpus 
+{
+	ArrayList<Character> elements;
+	
+	public Corpus(String file)
+	{
+		this.elements = new ArrayList<Character>();
+		this.processFile(file);
+	}
+	
+	private void processFile(String file)
+	{
+		//alle characters appenden
+		
+	}
+	
+	public Sentence getString(long start, long end)
+	{
+		return new Sentence("");
+	}
+	
+}

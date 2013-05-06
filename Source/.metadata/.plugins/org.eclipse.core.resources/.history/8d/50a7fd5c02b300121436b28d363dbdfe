@@ -1,0 +1,5 @@
+package textProcessing
+
+case class Sentence(val sentence: String) {
+
+}

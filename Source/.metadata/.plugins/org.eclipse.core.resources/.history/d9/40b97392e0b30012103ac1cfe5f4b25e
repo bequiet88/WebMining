@@ -1,0 +1,7 @@
+package textProcessing
+
+case class Sentence(val sentence: String) 
+{
+	val posTags : List[String] = List()
+	val namedEntity : List[String] = List()
+}

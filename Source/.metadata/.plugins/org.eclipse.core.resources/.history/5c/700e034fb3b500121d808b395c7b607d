@@ -1,0 +1,13 @@
+package contentAnalysis;
+
+public class Corpus 
+{
+	ArrayList<char> elements = new ArrayList<char>();
+	
+	public Corpus(String file)
+	{
+				
+	}
+	
+	
+}

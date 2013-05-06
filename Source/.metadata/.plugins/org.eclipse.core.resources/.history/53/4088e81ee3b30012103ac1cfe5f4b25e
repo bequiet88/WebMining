@@ -1,0 +1,61 @@
+package textProcessing
+
+import edu.stanford.nlp.pipeline.StanfordCoreNLP
+import java.util.Properties
+import edu.stanford.nlp.ling.CoreLabel
+import edu.stanford.nlp.ling.CoreAnnotations.NamedEntityTagAnnotation
+import edu.stanford.nlp.ling.CoreAnnotations.PartOfSpeechAnnotation
+import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation
+import edu.stanford.nlp.ling.CoreAnnotations.TextAnnotation
+import edu.stanford.nlp.ling.CoreAnnotations.TokensAnnotation
+import edu.stanford.nlp.pipeline.Annotation
+import edu.stanford.nlp.util.CoreMap;
+
+
+case class Sentence(val sentence: String) 
+{
+	def posTags : Array[String] 
+	def namedEntity : Array[String] 
+	
+	def processSentence() = {
+		val props : Properties  = new Properties();
+	    props.put("annotators", "tokenize, ssplit, pos, lemma, ner");
+		val pipeline :StanfordCoreNLP = new StanfordCoreNLP(props);
+
+	    // read data
+	    val text : String  = this.sentence;
+	    // create an empty Annotation just with the given text
+	    val document : Annotation  = new Annotation(text);
+	    // run all Annotators on this text
+	    pipeline.annotate(document);
+	    // these are all the sentences in this document
+	    val sentences : List[CoreMap]  = document.get(classOf[edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation]) 
+	      classOf[edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation] //document.get(classOf[SentencesAnnotation]);
+	   
+	    for(sentence <- sentences) 
+	    {
+	    	this.words = new String[sentence.get(TokensAnnotation.class).size()];
+	    	this.posTags = new String[sentence.get(TokensAnnotation.class).size()];
+	    	this.namedEntity = new String[sentence.get(TokensAnnotation.class).size()];
+
+	    	var index : Int  = 0;
+	
+	    	/*
+	    	 * Iterate over all tokens in sentence, 
+	    	 * put information into two arrays (one for words, one for posTags)
+	    	 */
+	    	for (CoreLabel token: sentence.get(TokensAnnotation.class)) 
+	    	{
+	    		String word = token.get(TextAnnotation.class);  
+	    		String posTag = token.get(PartOfSpeechAnnotation.class); 
+	    		
+	    		String ne = token.get(NamedEntityTagAnnotation.class);
+	    		this.namedEntity[index] = ne;
+	    		
+	    		this.words[index] = word;
+	    		this.posTags[index] = posTag;
+	    		index ++;
+	    	}	      	
+	    }    
+	}
+}

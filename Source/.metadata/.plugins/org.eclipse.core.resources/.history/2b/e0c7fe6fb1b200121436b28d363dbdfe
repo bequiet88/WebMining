@@ -1,0 +1,5 @@
+package textProcessing
+
+class Sentence {
+
+}

@@ -11,8 +11,20 @@ import java.util.regex.*;
 import model.Sentence;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TextSplitter.
+ */
 public class TextSplitter 
 {
+	
+	/**
+	 * Process text file.
+	 *
+	 * @param inputFile the input file
+	 * @param outputFile the output file
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static void processTextFile(String inputFile, String outputFile) throws IOException
 	{
 	    BufferedReader reader = new BufferedReader(new FileReader (new File(inputFile)));
@@ -47,6 +59,15 @@ public class TextSplitter
 	    writer.close();
 	}
 	
+	/**
+	 * Split into sentences.
+	 *
+	 * @param inputFile the input file
+	 * @return the array list
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws Exception the exception
+	 */
 	public static ArrayList<Sentence> splitIntoSentences(String inputFile) throws IOException, FileNotFoundException, Exception
 	{
 	    //List<String> lines = java.nio.file.Files.readAllLines(Paths.get(inputFile), Charset.defaultCharset());

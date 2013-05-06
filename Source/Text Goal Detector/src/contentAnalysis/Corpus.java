@@ -1,22 +1,33 @@
 package contentAnalysis;
 
-import java.io.File;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import model.Sentence;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Corpus.
+ */
 public class Corpus 
 {
+	
+	/** The elements. */
 	ArrayList<Character> elements;
+	
+	/** The sentences. */
 	ArrayList<Sentence> sentences;
 	
+	/**
+	 * Instantiates a new corpus.
+	 *
+	 * @param file the file
+	 * @throws Exception the exception
+	 */
 	public Corpus(String file) throws Exception
 	{
 
@@ -24,6 +35,12 @@ public class Corpus
 		this.processFile(file);
 	}
 	
+	/**
+	 * Process file.
+	 *
+	 * @param file the file
+	 * @throws Exception the exception
+	 */
 	private void processFile(String file) throws Exception
 	{
 		//alle characters appenden
@@ -56,6 +73,14 @@ public class Corpus
 //	    }
 	}
 	
+	/**
+	 * Gets the string.
+	 *
+	 * @param start the start
+	 * @param end the end
+	 * @return the string
+	 * @throws Exception the exception
+	 */
 	public Sentence getString(long start, long end) throws Exception
 	{
 		//in der arraylist nach zeichen zwischen start und end suchen und als Sentence zurueckgeben

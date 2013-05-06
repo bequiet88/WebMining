@@ -14,14 +14,32 @@ import model.Annotation;
 import model.GateDocument;
 import model.Tuple;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class XmlHandler.
+ */
 public class XmlHandler {
 
+	/** The xml file. */
 	private File xmlFile = null;
+	
+	/** The root. */
 	private GateDocument root = null;
+	
+	/** The iter. */
 	private ListIterator<Annotation> iter = null;
+	
+	/** The sentences. */
 	private List<Tuple<Annotation,Boolean>> sentences = new ArrayList<Tuple<Annotation,Boolean>>();
+	
+	/** The goals. */
 	private List<Tuple<BigInteger, BigInteger>> goals = new ArrayList<Tuple<BigInteger, BigInteger>>();
 
+	/**
+	 * Instantiates a new xml handler.
+	 *
+	 * @param inputPath the input path
+	 */
 	public XmlHandler(String inputPath) {
 
 		xmlFile = new File(inputPath);
@@ -29,6 +47,9 @@ public class XmlHandler {
 		handleAnnotations();
 	}
 
+	/**
+	 * Initialize jaxb.
+	 */
 	private void initializeJAXB() {
 
 		try {
@@ -48,6 +69,9 @@ public class XmlHandler {
 
 	}
 
+	/**
+	 * Handle annotations.
+	 */
 	private void handleAnnotations() {
 
 		iter = root.getAnnotationSet().get(0).getAnnotation().listIterator();
@@ -73,6 +97,12 @@ public class XmlHandler {
 
 	}
 
+	/**
+	 * Find sentence.
+	 *
+	 * @param goal the goal
+	 * @return the tuple
+	 */
 	private Tuple<Annotation,Boolean> findSentence(Tuple<BigInteger, BigInteger> goal) {
 
 		ListIterator<Tuple<Annotation,Boolean>> senIter = sentences.listIterator();
@@ -94,6 +124,11 @@ public class XmlHandler {
 		return null;
 	}
 
+	/**
+	 * Gets the pos sentences.
+	 *
+	 * @return the pos sentences
+	 */
 	public List<Tuple<BigInteger, BigInteger>> getPosSentences() {
 
 		List<Tuple<BigInteger, BigInteger>> result = new ArrayList<Tuple<BigInteger, BigInteger>>();
@@ -114,6 +149,12 @@ public class XmlHandler {
 		return result;
 	}
 
+	/**
+	 * Gets the neg sentences.
+	 *
+	 * @param lengthPos the length pos
+	 * @return the neg sentences
+	 */
 	public List<Tuple<BigInteger, BigInteger>> getNegSentences(int lengthPos) {
 
 		List<Tuple<BigInteger, BigInteger>> result = new ArrayList<Tuple<BigInteger, BigInteger>>();

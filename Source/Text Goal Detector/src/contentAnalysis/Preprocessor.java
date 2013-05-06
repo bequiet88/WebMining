@@ -41,6 +41,12 @@ public class Preprocessor {
 		
 	}
 	
+	/**
+	 * Process resulting xml.
+	 *
+	 * @param xml the xml
+	 * @param txt the txt
+	 */
 	private static void processResultingXML(String xml, String txt) {
 		try {
 			XmlHandler myHandler = new XmlHandler(xml);

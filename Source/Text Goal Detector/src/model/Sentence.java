@@ -19,50 +19,101 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Sentence.
+ */
 public class Sentence {
 	
+	/** The counter. */
 	private static int counter = 0;
 	
+	/** The sentence. */
 	private String sentence = null;
 
+	/**
+	 * Gets the sentence.
+	 *
+	 * @return the sentence
+	 */
 	public String getSentence() {
 		return sentence;
 	}
 
+	/** The words. */
 	private String[] words;
 
+	/**
+	 * Gets the words.
+	 *
+	 * @return the words
+	 */
 	public String[] getWords() {
 		return words;
 	}
 
+	/** The pos tags. */
 	private String[] posTags;
 
+	/**
+	 * Gets the pos tags.
+	 *
+	 * @return the pos tags
+	 */
 	public String[] getPosTags() {
 		return posTags;
 	}
 
+	/** The named entity. */
 	private String[] namedEntity;
 
+	/**
+	 * Gets the named entity.
+	 *
+	 * @return the named entity
+	 */
 	public String[] getNamedEntity() {
 		return namedEntity;
 	}
 
+	/** The contains goal. */
 	private boolean containsGoal;
 
+	/**
+	 * Checks if is contains goal.
+	 *
+	 * @return true, if is contains goal
+	 */
 	public boolean isContainsGoal() {
 		return containsGoal;
 	}
 
+	/**
+	 * Sets the contains goal.
+	 *
+	 * @param containsGoal the new contains goal
+	 */
 	public void setContainsGoal(boolean containsGoal) {
 		this.containsGoal = containsGoal;
 	}
 
+	/** The goal probability. */
 	private double goalProbability;
 
+	/**
+	 * Gets the goal probability.
+	 *
+	 * @return the goal probability
+	 */
 	public double getGoalProbability() {
 		return goalProbability;
 	}
 
+	/**
+	 * Sets the goal probability.
+	 *
+	 * @param goalProbability the new goal probability
+	 */
 	public void setGoalProbability(double goalProbability) {
 		if (goalProbability > 1.0)
 			this.goalProbability = 1.0;
@@ -72,6 +123,13 @@ public class Sentence {
 			this.goalProbability = goalProbability;
 	}
 
+	/**
+	 * Instantiates a new sentence.
+	 *
+	 * @param sentence the sentence
+	 * @param doPreprocessing the do preprocessing
+	 * @throws Exception the exception
+	 */
 	public Sentence(String sentence, boolean doPreprocessing) throws Exception {
 		super();
 		this.sentence = sentence;
@@ -82,6 +140,11 @@ public class Sentence {
 		this.goalProbability = 0.0;
 	}
 
+	/**
+	 * Process words.
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private void processWords() throws IOException {
 		StanfordCoreNLP pipeline;
 		Properties props = new Properties();
@@ -119,6 +182,13 @@ public class Sentence {
 		}
 	}
 
+	/**
+	 * Write to file.
+	 *
+	 * @param fileName the file name
+	 * @param append the append
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void writeToFile(String fileName, boolean append) throws IOException {
 		BufferedWriter writer = new BufferedWriter(new FileWriter(new File(
 				fileName), append));
@@ -145,6 +215,13 @@ public class Sentence {
 		writer.close();
 	}
 
+	/**
+	 * Write sentences to directories.
+	 *
+	 * @param sentences the sentences
+	 * @param directory the directory
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static void writeSentencesToDirectories(
 			ArrayList<Sentence> sentences, String directory) throws IOException {
 		File dir = new File(directory);
@@ -193,6 +270,13 @@ public class Sentence {
 		}
 	}
 
+	/**
+	 * Write sentence to directory.
+	 *
+	 * @param directory the directory
+	 * @param classifier the classifier
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void writeSentenceToDirectory(String directory, Boolean classifier) throws IOException {
 		File dir = new File(directory);
 		File posDir = new File(directory + "/pos");

@@ -1,0 +1,11 @@
+package contentAnalysis;
+
+public class Corpus 
+{
+	public Corpus(String file)
+	{
+				
+	}
+	
+	
+}

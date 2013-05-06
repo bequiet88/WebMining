@@ -2,6 +2,7 @@
 # eclipse #
 /.classpath
 /.project
+/.metadata
 
 *.class
 

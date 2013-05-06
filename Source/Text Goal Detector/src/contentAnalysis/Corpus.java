@@ -1,5 +1,6 @@
 package contentAnalysis;
 
+import java.io.File;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -8,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import model.Sentence;
+
+
 public class Corpus 
 {
 	ArrayList<Character> elements;
@@ -15,6 +19,7 @@ public class Corpus
 	
 	public Corpus(String file) throws Exception
 	{
+
 		this.elements = new ArrayList<Character>();
 		this.processFile(file);
 	}
@@ -31,23 +36,24 @@ public class Corpus
 	    	}
 	    }
 	    
-	    String text = null;
-	    for(String l : lines)
-	    {
-	    	text += l + " ";
-	    }
-	    
-	    BreakIterator iterator = BreakIterator.getSentenceInstance(Locale.ENGLISH);
-	    iterator.setText(text);
-	    int start = iterator.first();
-	    
-	    sentences = new ArrayList<Sentence>();  
-	    for (int end = iterator.next();
-	        end != BreakIterator.DONE;
-	        start = end, end = iterator.next()) 
-	    {
-	    	sentences.add(new Sentence(text.substring(start,end), true));
-	    }
+	    System.out.println(elements.size());
+//	    String text = null;
+//	    for(String l : lines)
+//	    {
+//	    	text += l + " ";
+//	    }
+//	    
+//	    BreakIterator iterator = BreakIterator.getSentenceInstance(Locale.ENGLISH);
+//	    iterator.setText(text);
+//	    int start = iterator.first();
+//	    
+//	    sentences = new ArrayList<Sentence>();  
+//	    for (int end = iterator.next();
+//	        end != BreakIterator.DONE;
+//	        start = end, end = iterator.next()) 
+//	    {
+//	    	sentences.add(new Sentence(text.substring(start,end), false));
+//	    }
 	}
 	
 	public Sentence getString(long start, long end) throws Exception
@@ -55,15 +61,15 @@ public class Corpus
 		//in der arraylist nach zeichen zwischen start und end suchen und als Sentence zurueckgeben
 		//Sentences machen
 		String s = "";
-		for(long i = start; i<=end;i++)
+		for(long i = start+1; i<=end && i<elements.size();i++)
 		{
-			s.concat((elements.get((int)i)).toString());
+			s=s.concat((elements.get((int)i)).toString());
 		}
 		Sentence sentence = new Sentence(s, false);
 		
 		//find sentence in list and remove it!
-		if(sentences.contains(sentence))
-			sentences.remove(sentence);
+//		if(sentences.contains(sentence))
+//			sentences.remove(sentence);
 		
 		return sentence;
 	}

@@ -60,7 +60,7 @@ public class XmlHandler {
 
 			if (currAnno.getType().equals("Sentence")) {
 
-				sentences.add(new Tuple<Annotation,Boolean>(currAnno, false));
+				sentences.add(new Tuple<Annotation,Boolean>(currAnno, Preprocessor.neg));
 			} else if (currAnno.getType().equals("Goal")) {
 				Tuple<BigInteger, BigInteger> goalTuple = new Tuple<BigInteger, BigInteger>(
 						currAnno.getStartNode(), currAnno.getEndNode());
@@ -86,7 +86,7 @@ public class XmlHandler {
 			if (currTuple.x.longValue() <= goal.x.longValue()
 					&& currTuple.y.longValue() >= goal.y.longValue()) {
 				senIter.remove();
-				Tuple<Annotation,Boolean> sentencePos = new Tuple<Annotation,Boolean>(currSen.x, true);
+				Tuple<Annotation,Boolean> sentencePos = new Tuple<Annotation,Boolean>(currSen.x, Preprocessor.pos);
 				sentences.add(sentencePos);
 				return currSen;
 			}

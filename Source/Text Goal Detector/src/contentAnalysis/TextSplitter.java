@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.*;
 
+import model.Sentence;
+
 
 public class TextSplitter 
 {
@@ -29,12 +31,12 @@ public class TextSplitter
 	    	}
 	    	else if(m.matches())
 	    	{
-	    	    text = text.concat("\n\n" + line.substring(20) + "\n");
+	    	    text = text.concat(line.substring(20) + "");
 	    	    line = reader.readLine();
 	    	}
 	    	else
 	    	{
-	    		text = text.concat(line + "\n");
+	    		text = text.concat(line + "");
 		    	line = reader.readLine();
 	    	}    	
 	    }

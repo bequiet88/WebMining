@@ -151,7 +151,7 @@ Rule: Goal10
 
 /*[VB * DT goal]
 *[VB * PRP$ goal]
-*/
+
 Rule: Goal11
 
 (
@@ -162,9 +162,11 @@ Rule: Goal11
   )
 :goalSequence -->
   :goalSequence.Goal = {kind=Goal, rule=Goal11}
+*/
+
   
 /*[PERSON VB * shot]
-*/
+
 Rule: Goal12
 
 (
@@ -175,9 +177,11 @@ Rule: Goal12
   )
 :goalSequence -->
   :goalSequence.Goal = {kind=Goal, rule=Goal12}
-
-/*[VB PERSON POS side * victory]
 */
+  
+  
+/*[VB PERSON POS side * victory]
+*/ 
 Rule: Goal13
 
 (
@@ -190,7 +194,7 @@ Rule: Goal13
 )
 :goalSequence -->
   :goalSequence.Goal = {kind=Goal, rule=Goal13}
-  
+ 
 /*[VB * twice]
 */
 Rule: Goal14

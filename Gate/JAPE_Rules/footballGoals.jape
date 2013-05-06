@@ -1,0 +1,212 @@
+Phase: FootballGoals
+
+Input: Token Lookup Person Location Organization 
+
+Options: control = appelt
+
+/*[PERSON scored *]
+*
+*[ORGANIZATION scored *]
+*/
+
+Rule: Goal1
+
+(
+  ({Person.rule == PersonFinal}|{Lookup.majorType == country_adj}|{Token.category == NNP}|{Location.locType == city}|{Organization.rule == LocOrg})
+  {Token.string =~ score}
+  ({Token.category == DT}|{Token.category == CD}|{Token.category == IN})?
+)
+:goalSequence -->
+  :goalSequence.Goal = {kind=Goal, rule=Goal1}
+  
+
+/*[PERSON opened DT scoring]
+*
+*[ORGANIZATION opened DT scoring]
+*/
+Rule: Goal2
+
+(
+  ({Person.rule == PersonFinal}|{Lookup.majorType == country_adj}|{Token.category == NNP}|{Location.locType == city}|{Organization.rule == LocOrg})
+  {Token.string =~ open}
+  ({Token.category == DT}|{Token.category == CD}|{Token.category == IN})?
+  {Token.string =~ scor}
+)
+:goalSequence -->
+  :goalSequence.Goal = {kind=Goal, rule=Goal2}
+    
+
+/*[PERSON POS * NN IN * corner]
+*/	
+Rule: Goal3
+
+(
+  ({Person.rule == PersonFinal}|{Lookup.majorType == country_adj}|{Token.category == NNP})
+  {Token.category == POS}
+  ({Token.length > 1})*
+  ({Token.category == NN}|{Token.category == NNS})
+  {Token.category == IN} 
+  ({Token.length > 1})*
+  {Token.string =~ corner}
+)
+:goalSequence -->
+  :goalSequence.Goal = {kind=Goal, rule=Goal3}
+  
+/*[PERSON VB * PERSON POS pass]
+*/
+Rule: Goal4
+
+(
+  ({Person.rule == PersonFinal}|{Lookup.majorType == country_adj}|{Token.category == NNP})
+  {Token.category =~ VB}
+  ({Token.length > 1})*
+  ({Person.rule == PersonFinal}|{Lookup.majorType == country_adj}|{Token.category == NNP})
+  {Token.category == POS}
+  {Token.string == pass}
+)
+:goalSequence -->
+  :goalSequence.Goal = {kind=Goal, rule=Goal4}
+  
+/*[VB * past * PERSON]
+*/
+Rule: Goal5
+
+(
+ {Token.category =~ VB}
+  ({Token.length > 1})*
+  {Token.string == past}
+  ({Token.length > 1})*
+ ({Person.rule == PersonFinal}|{Lookup.majorType == country_adj}|{Token.category == NNP})
+  )
+:goalSequence -->
+  :goalSequence.Goal = {kind=Goal, rule=Goal5}
+
+/*[PERSON VB again]
+*[ORGANIZATION VB again]
+*/
+  Rule: Goal6
+
+(
+  ({Person.rule == PersonFinal}|{Lookup.majorType == country_adj}|{Token.category == NNP}|{Location.locType == city}|{Organization.rule == LocOrg})
+ {Token.category =~ VB}
+  {Token.string == again}
+  )
+:goalSequence -->
+  :goalSequence.Goal = {kind=Goal, rule=Goal6}
+  
+/*[VB * into * net]
+*/
+Rule: Goal7
+
+(
+ {Token.category =~ VB}
+ ({Token.length > 1})*
+  {Token.string =~ in}
+ ({Token.length > 1})*
+  {Token.string == net}
+  )
+:goalSequence -->
+  :goalSequence.Goal = {kind=Goal, rule=Goal7}
+
+/*[PERSON * VB * corner]
+*/
+Rule: Goal8  
+
+(
+ ({Person.rule == PersonFinal}|{Lookup.majorType == country_adj}|{Token.category == NNP})
+ ({Token.length > 1})*
+ {Token.category =~ VB}
+ ({Token.length > 1})*
+  {Token.string == corner}
+  )
+:goalSequence -->
+  :goalSequence.Goal = {kind=Goal, rule=Goal8}
+
+/*[PERSON * volley]
+ */
+Rule: Goal9
+
+(
+ ({Person.rule == PersonFinal}|{Lookup.majorType == country_adj}|{Token.category == NNP})
+ ({Token.length > 1})*
+  {Token.string =~ volley}
+  )
+:goalSequence -->
+  :goalSequence.Goal = {kind=Goal, rule=Goal9}
+
+/* [ORGANIZATION VB DT lead] 
+* [PERSON VB PRP$ lead]
+*/
+Rule: Goal10
+
+(
+  ({Person.rule == PersonFinal}|{Lookup.majorType == country_adj}|{Token.category == NNP}|{Location.locType == city}|{Organization.rule == LocOrg})
+  {Token.category =~ VB}
+  ({Token.category == DT}|{Token.category == "PRP$"})
+  {Token.string =~ lead}
+  )
+:goalSequence -->
+  :goalSequence.Goal = {kind=Goal, rule=Goal10}
+  
+
+/*[VB * DT goal]
+*[VB * PRP$ goal]
+*/
+Rule: Goal11
+
+(
+  {Token.category =~ VB}
+  ({Token.length > 1})*
+  ({Token.category == DT}|{Token.category == "PRP$"})
+  {Token.string =~ goal}
+  )
+:goalSequence -->
+  :goalSequence.Goal = {kind=Goal, rule=Goal11}
+  
+/*[PERSON VB * shot]
+*/
+Rule: Goal12
+
+(
+  ({Person.rule == PersonFinal}|{Lookup.majorType == country_adj}|{Token.category == NNP}|{Location.locType == city}|{Organization.rule == LocOrg})
+  {Token.category =~ VB}
+  ({Token.length > 1})*
+  {Token.string =~ shot}
+  )
+:goalSequence -->
+  :goalSequence.Goal = {kind=Goal, rule=Goal12}
+
+/*[VB PERSON POS side * victory]
+*/
+Rule: Goal13
+
+(
+  {Token.category =~ VB}
+ ({Person.rule == PersonFinal}|{Lookup.majorType == country_adj}|{Token.category == NNP}|{Location.locType == city}|{Organization.rule == LocOrg})
+  {Token.category == POS}
+  {Token.string =~ side}  
+  ({Token.length > 1})*
+  {Token.string =~ victor}
+)
+:goalSequence -->
+  :goalSequence.Goal = {kind=Goal, rule=Goal13}
+  
+/*[VB * twice]
+*/
+Rule: Goal14
+(
+  {Token.category =~ VB}
+  ({Token.length > 1})*
+  {Token.string =~ twice}
+)
+:goalSequence -->
+  :goalSequence.Goal = {kind=Goal, rule=Goal14}
+
+  
+    
+  
+  
+
+  
+ 
+    

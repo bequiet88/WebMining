@@ -110,8 +110,7 @@
 
 \chapter{Project Summary}
 \section{Application Domain and Goals}
-Our interest in looking into text mining and, particulary, into sport report mining emerges from the overwhelming availability, omnipresence, and ubiquitousness of information on sports in media.\p 
-
+Our interest in looking into text mining and, particulary, into sport report mining emerges from the overwhelming availability, omnipresence, and ubiquitousness of information on sports in media. 
 
 The project originates from a classical text mining problem. Generally speaking, we would like to deal with the question whether or not Natural Language Processing (NLP) tools are able to extract and correctly classify certain events in a given text. More specifically, our intention is machine-reading written reports on Premier League football matches. The particular event we are looking into is the scoring of a goal. At first sight, this appears rather straightforward, but by taking into account that there are numerous or even infinite ways to express that a team marks a goal, the difficulty to find as many of them as possible is challenging. Thus, a classification of text snippets based on manually found patterns indicating a goal is needed. Furthermore, we would like to enhance our search result by using learning algorithms.  
 
@@ -122,7 +121,7 @@ Domains:
 - Text Mining: Learning a Classification model on automatically-generated labeled data seeds, bootstrapped negative seeds	
 
 part-of-speech taggers are computer programs for assigning contextually appropriate grammatical descriptors to words in texts;
-these approaches are: taggers based on handwritten local rules, taggers based on n-grams automatically derived from text corpora\citep[p.219]{Voutilainen2005}  n-gram are subsets of a text with length n
+these approaches are: taggers based on handwritten local rules, taggers based on n-grams automatically derived from text corpora   n-gram are subsets of a text with length n \citep[p.219]{Voutilainen2005} 
 
 Due to the explosion of available textual data, text mining and Information Ex-
 traction (IE) from texts have become important topics of study in recent years.
@@ -145,11 +144,13 @@ The project originates from a classical text mining problem. Generally speaking,
 
 While looking for goals in football match reports, we are omitting the detection of team that scored as well as the unique recognition of a goal as many reports refer multiple times to the same goal.
 
-
-
 Jochen. Einleitung, Uebertragbarkeit auf andere Text Mining Tasks. Steps to goal
 
 \section{Structure and size of the data set}
+
+Since many NLP tools work best with English language, we would like to increase our chance of success by using football reports of the English Premier League. The BBC sports department offers match reports for every game of the currently ongoing season 2012/2013. The amount of reports is sufficient for the purpose of this project. A Premier League season consists of 38 matchdays with 10 games each. BBC provides one report per game. BBC is a goog datasource because the reports are neutrally written and have no preference for any team. Furthermore, the used language has a higher level and should be, compared to spoken word, easier to analyse. \\
+The first step of the project will be collecting the data from the BBC homepage. 	
+
 Matze. siehe outline, punkt 1.2 Struktur input und struktur fuer web mining (satzweise getrennt)
 
 \section{Preprocessing}
@@ -164,6 +165,6 @@ Jochen. Resultate von Precision und Recall der Classification. Diskussion. Posit
 \section{Conclusion}
 Wrap-up.
 
-\bibliographystyle{plain}
+\bibliographystyle{apalike}
 \bibliography{bibliography}
 \end{document}

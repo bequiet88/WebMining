@@ -13,10 +13,10 @@
     <parameter key="process_duration_for_mail" value="30"/>
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
-      <operator activated="true" class="text:process_document_from_file" compatibility="5.3.000" expanded="true" height="76" name="Process Documents from Files" width="90" x="45" y="120">
+      <operator activated="true" class="text:process_document_from_file" compatibility="5.3.000" expanded="true" height="76" name="Process Documents from Files" width="90" x="45" y="30">
         <list key="text_directories">
-          <parameter key="pos" value="/Users/matthiasr/Documents/Web Mining Project/WebMining/RapidMiner/classification_results/automatically_labeled/pos"/>
-          <parameter key="neg" value="/Users/matthiasr/Documents/Web Mining Project/WebMining/RapidMiner/classification_results/automatically_labeled/neg"/>
+          <parameter key="pos" value="D:\Studium\Classes_Sem2\Web Mining\Project\WebMining\RapidMiner\classification_results\automatically_labeled\pos"/>
+          <parameter key="neg" value="D:\Studium\Classes_Sem2\Web Mining\Project\WebMining\RapidMiner\classification_results\automatically_labeled\neg"/>
         </list>
         <parameter key="file_pattern" value="*"/>
         <parameter key="extract_text_only" value="true"/>
@@ -41,7 +41,7 @@
             <parameter key="max_token_length" value="3"/>
           </operator>
           <operator activated="true" class="text:filter_stopwords_english" compatibility="5.3.000" expanded="true" height="60" name="Filter Stopwords (English)" width="90" x="246" y="30"/>
-          <operator activated="true" class="text:filter_tokens_by_content" compatibility="5.3.000" expanded="true" height="60" name="Filter Tokens (by Content)" width="90" x="380" y="30">
+          <operator activated="false" class="text:filter_tokens_by_content" compatibility="5.3.000" expanded="true" height="60" name="Filter Tokens (by Content)" width="90" x="380" y="30">
             <parameter key="condition" value="contains match"/>
             <parameter key="regular_expression" value="half|minutes|season"/>
             <parameter key="case_sensitive" value="false"/>
@@ -49,14 +49,18 @@
           </operator>
           <connect from_port="document" to_op="Tokenize" to_port="document"/>
           <connect from_op="Tokenize" from_port="document" to_op="Filter Stopwords (English)" to_port="document"/>
-          <connect from_op="Filter Stopwords (English)" from_port="document" to_op="Filter Tokens (by Content)" to_port="document"/>
-          <connect from_op="Filter Tokens (by Content)" from_port="document" to_port="document 1"/>
+          <connect from_op="Filter Stopwords (English)" from_port="document" to_port="document 1"/>
           <portSpacing port="source_document" spacing="0"/>
           <portSpacing port="sink_document 1" spacing="0"/>
           <portSpacing port="sink_document 2" spacing="0"/>
         </process>
       </operator>
-      <operator activated="true" class="x_validation" compatibility="5.3.005" expanded="true" height="112" name="Validation" width="90" x="313" y="255">
+      <operator activated="true" class="weight_by_information_gain" compatibility="5.3.005" expanded="true" height="76" name="Weight by Information Gain" width="90" x="179" y="30">
+        <parameter key="normalize_weights" value="true"/>
+        <parameter key="sort_weights" value="true"/>
+        <parameter key="sort_direction" value="descending"/>
+      </operator>
+      <operator activated="true" class="x_validation" compatibility="5.3.005" expanded="true" height="112" name="Validation" width="90" x="313" y="30">
         <parameter key="create_complete_model" value="false"/>
         <parameter key="average_performances_only" value="true"/>
         <parameter key="leave_one_out" value="false"/>
@@ -65,7 +69,7 @@
         <parameter key="use_local_random_seed" value="false"/>
         <parameter key="local_random_seed" value="1992"/>
         <process expanded="true">
-          <operator activated="true" class="k_nn" compatibility="5.3.005" expanded="true" height="76" name="k-NN" width="90" x="112" y="210">
+          <operator activated="true" class="k_nn" compatibility="5.3.005" expanded="true" height="76" name="k-NN" width="90" x="45" y="30">
             <parameter key="k" value="50"/>
             <parameter key="weighted_vote" value="true"/>
             <parameter key="measure_types" value="NumericalMeasures"/>
@@ -83,6 +87,36 @@
             <parameter key="kernel_a" value="1.0"/>
             <parameter key="kernel_b" value="0.0"/>
           </operator>
+          <operator activated="false" class="support_vector_machine" compatibility="5.3.005" expanded="true" height="112" name="SVM" width="90" x="45" y="120">
+            <parameter key="kernel_type" value="dot"/>
+            <parameter key="kernel_gamma" value="1.0"/>
+            <parameter key="kernel_sigma1" value="1.0"/>
+            <parameter key="kernel_sigma2" value="0.0"/>
+            <parameter key="kernel_sigma3" value="2.0"/>
+            <parameter key="kernel_shift" value="1.0"/>
+            <parameter key="kernel_degree" value="2.0"/>
+            <parameter key="kernel_a" value="1.0"/>
+            <parameter key="kernel_b" value="0.0"/>
+            <parameter key="kernel_cache" value="200"/>
+            <parameter key="C" value="0.0"/>
+            <parameter key="convergence_epsilon" value="0.0010"/>
+            <parameter key="max_iterations" value="100000"/>
+            <parameter key="scale" value="true"/>
+            <parameter key="calculate_weights" value="true"/>
+            <parameter key="return_optimization_performance" value="true"/>
+            <parameter key="L_pos" value="1.0"/>
+            <parameter key="L_neg" value="1.0"/>
+            <parameter key="epsilon" value="0.0"/>
+            <parameter key="epsilon_plus" value="0.0"/>
+            <parameter key="epsilon_minus" value="0.0"/>
+            <parameter key="balance_cost" value="false"/>
+            <parameter key="quadratic_loss_pos" value="false"/>
+            <parameter key="quadratic_loss_neg" value="false"/>
+            <parameter key="estimate_performance" value="false"/>
+          </operator>
+          <operator activated="false" class="naive_bayes" compatibility="5.3.005" expanded="true" height="76" name="Naive Bayes" width="90" x="45" y="255">
+            <parameter key="laplace_correction" value="true"/>
+          </operator>
           <connect from_port="training" to_op="k-NN" to_port="training set"/>
           <connect from_op="k-NN" from_port="model" to_port="model"/>
           <portSpacing port="source_training" spacing="0"/>
@@ -90,11 +124,11 @@
           <portSpacing port="sink_through 1" spacing="0"/>
         </process>
         <process expanded="true">
-          <operator activated="true" class="apply_model" compatibility="5.3.005" expanded="true" height="76" name="Apply Model" width="90" x="112" y="210">
+          <operator activated="true" class="apply_model" compatibility="5.3.005" expanded="true" height="76" name="Apply Model" width="90" x="45" y="30">
             <list key="application_parameters"/>
             <parameter key="create_view" value="false"/>
           </operator>
-          <operator activated="true" class="performance_classification" compatibility="5.3.005" expanded="true" height="76" name="Performance" width="90" x="220" y="120">
+          <operator activated="true" class="performance_classification" compatibility="5.3.005" expanded="true" height="76" name="Performance" width="90" x="179" y="30">
             <parameter key="main_criterion" value="first"/>
             <parameter key="accuracy" value="true"/>
             <parameter key="classification_error" value="true"/>
@@ -132,11 +166,60 @@
           <portSpacing port="sink_averagable 2" spacing="0"/>
         </process>
       </operator>
-      <connect from_op="Process Documents from Files" from_port="example set" to_op="Validation" to_port="training"/>
+      <operator activated="true" class="text:process_document_from_file" compatibility="5.3.000" expanded="true" height="76" name="Process Documents from Files (2)" width="90" x="313" y="165">
+        <list key="text_directories">
+          <parameter key="example" value="D:\Studium\Classes_Sem2\Web Mining\Project\WebMining\RapidMiner\classification_results\manually_labeled\Matchreport"/>
+        </list>
+        <parameter key="file_pattern" value="*"/>
+        <parameter key="extract_text_only" value="true"/>
+        <parameter key="use_file_extension_as_type" value="true"/>
+        <parameter key="content_type" value="txt"/>
+        <parameter key="encoding" value="UTF-8"/>
+        <parameter key="create_word_vector" value="true"/>
+        <parameter key="vector_creation" value="TF-IDF"/>
+        <parameter key="add_meta_information" value="true"/>
+        <parameter key="keep_text" value="false"/>
+        <parameter key="prune_method" value="none"/>
+        <parameter key="prunde_below_percent" value="3.0"/>
+        <parameter key="prune_above_percent" value="30.0"/>
+        <parameter key="prune_below_rank" value="0.05"/>
+        <parameter key="prune_above_rank" value="0.95"/>
+        <parameter key="datamanagement" value="double_sparse_array"/>
+        <process expanded="true">
+          <operator activated="true" class="text:tokenize" compatibility="5.3.000" expanded="true" name="Tokenize (2)">
+            <parameter key="mode" value="non letters"/>
+            <parameter key="characters" value=".:"/>
+            <parameter key="language" value="English"/>
+            <parameter key="max_token_length" value="3"/>
+          </operator>
+          <operator activated="true" class="text:filter_stopwords_english" compatibility="5.3.000" expanded="true" name="Filter Stopwords (2)"/>
+          <operator activated="true" class="text:filter_tokens_by_content" compatibility="5.3.000" expanded="true" name="Filter Tokens (2)">
+            <parameter key="condition" value="contains match"/>
+            <parameter key="regular_expression" value="half|minutes|season"/>
+            <parameter key="case_sensitive" value="false"/>
+            <parameter key="invert condition" value="true"/>
+          </operator>
+          <connect from_port="document" to_op="Tokenize (2)" to_port="document"/>
+          <connect from_op="Tokenize (2)" from_port="document" to_op="Filter Stopwords (2)" to_port="document"/>
+          <connect from_op="Filter Stopwords (2)" from_port="document" to_op="Filter Tokens (2)" to_port="document"/>
+          <connect from_op="Filter Tokens (2)" from_port="document" to_port="document 1"/>
+          <portSpacing port="source_document" spacing="0"/>
+          <portSpacing port="sink_document 1" spacing="0"/>
+          <portSpacing port="sink_document 2" spacing="0"/>
+        </process>
+      </operator>
+      <operator activated="true" class="apply_model" compatibility="5.3.005" expanded="true" height="76" name="Apply Model (2)" width="90" x="514" y="30">
+        <list key="application_parameters"/>
+        <parameter key="create_view" value="false"/>
+      </operator>
+      <connect from_op="Process Documents from Files" from_port="example set" to_op="Weight by Information Gain" to_port="example set"/>
       <connect from_op="Process Documents from Files" from_port="word list" to_port="result 1"/>
-      <connect from_op="Validation" from_port="model" to_port="result 2"/>
-      <connect from_op="Validation" from_port="training" to_port="result 3"/>
-      <connect from_op="Validation" from_port="averagable 1" to_port="result 4"/>
+      <connect from_op="Weight by Information Gain" from_port="weights" to_port="result 3"/>
+      <connect from_op="Weight by Information Gain" from_port="example set" to_op="Validation" to_port="training"/>
+      <connect from_op="Validation" from_port="model" to_op="Apply Model (2)" to_port="model"/>
+      <connect from_op="Validation" from_port="averagable 1" to_port="result 2"/>
+      <connect from_op="Process Documents from Files (2)" from_port="example set" to_op="Apply Model (2)" to_port="unlabelled data"/>
+      <connect from_op="Apply Model (2)" from_port="labelled data" to_port="result 4"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
       <portSpacing port="sink_result 2" spacing="0"/>

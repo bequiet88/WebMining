@@ -110,21 +110,36 @@
 
 \chapter{Project Summary}
 \section{Application Domain and Goals}
+Our interest in looking into text mining and, particulary, into sport report mining emerges from the overwhelming availability, omnipresence, and ubiquitousness of information on sports in media.\p 
+
+
+The project originates from a classical text mining problem. Generally speaking, we would like to deal with the question whether or not Natural Language Processing (NLP) tools are able to extract and correctly classify certain events in a given text. More specifically, our intention is machine-reading written reports on Premier League football matches. The particular event we are looking into is the scoring of a goal. At first sight, this appears rather straightforward, but by taking into account that there are numerous or even infinite ways to express that a team marks a goal, the difficulty to find as many of them as possible is challenging. Thus, a classification of text snippets based on manually found patterns indicating a goal is needed. Furthermore, we would like to enhance our search result by using learning algorithms.  
+
+
+Domains:
+
+- Information Extraction w/ help of web crawling, NLP, POS Tagging, NER, manually designed patterns matching football goals
+- Text Mining: Learning a Classification model on automatically-generated labeled data seeds, bootstrapped negative seeds	
+
+part-of-speech taggers are computer programs for assigning contextually appropriate grammatical descriptors to words in texts;
+these approaches are: taggers based on handwritten local rules, taggers based on n-grams automatically derived from text corpora\citep[p.219]{Voutilainen2005}  n-gram are subsets of a text with length n
 
 Due to the explosion of available textual data, text mining and Information Ex-
 traction (IE) from texts have become important topics of study in recent years.
 In particular, detection of relations between named entities is a challenging task
-to automatically discover new relationships in texts.
+to automatically discover new relationships in texts. \citep[p.1]{Cellier2010}
 
 Some previous works use hand-
 crafted linguistic IE rules for that task which is time consuming [7,5]. Other
 methods based on Machine Learning (ML) techniques [10] give good results but
-run as a “black box”
+run as a “black box” \citep[p.1]{Cellier2010}
 
 Sequential pattern mining [1] is a data mining technique that aims at discovering
 correlations between events through their order of appearance. Sequential pat-
 tern mining is an important ﬁeld of data mining with broad applications (e.g.,
-biology, marketing, security)
+biology, marketing, security) \citep[p.1]{Cellier2010}
+
+Information extraction (IE) is the automatic identification of selected types of entities, relations, or events in free text. \citep[p.545]{Grishman2005}
 
 The project originates from a classical text mining problem. Generally speaking, we would like to deal with the question whether or not Natural Language Processing (NLP) tools are able to extract and correctly classify certain events in a given text. More specifically, our intention is machine-reading written reports on Premier League football matches. The particular event we are looking into is the scoring of a goal. At first sight, this appears rather straightforward, but by taking into account that there are numerous or even infinite ways to express that a team marks a goal, the difficulty to find as many of them as possible is challenging. Thus, a classification of text snippets based on manually found patterns indicating a goal is needed. Furthermore, we would like to enhance our search result by using learning algorithms.  
 
@@ -139,7 +154,7 @@ Matze. siehe outline, punkt 1.2 Struktur input und struktur fuer web mining (sat
 
 \section{Preprocessing}
 Matze: Wie wurde struktur aus vorherigem Abschnitt erreicht? 
-Jochen: Gate
+Jochen: Gate, Jape-Rules, ngrams
 
 \section{Actual Web Mining}
 Matze. Verbindung zur Vorlesung. Web mining techniken. Rapidminer prozess. classifier. Suche nach perfect settings. apply model 

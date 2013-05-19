@@ -118,7 +118,7 @@ On the one hand, the blogosphere puts the right of speech on an entirely new lev
 
 Due these plentiful resasons, the domains of text mining and Information Extraction (IE) have drawn their attention to us. Both domains tied together enable the automatic identification of selected types of entities, relations, or events in free text \citep[p.545]{Grishman2005}. Our research interest and also project goal is two-fold. Firstly, we want to find and apply patterns extracting a particular event from an unknown textual source. Secondly, the robustness of the patterns found should be assessed by classifying an unlabeled source. According to \citeauthor*{Weiss2005} \citeyearpar{Weiss2005} the first task can be referred to as Information Retrievel because we provide "clues" that determine the matching documents. They also argue that the second task is considered as a Document Classification one.\\
 
-More specifically, we want to examplify written football match reports from England's Premiere League to investigate whether the event of a goal can be mined for automatically. With the help of manually-found seeds, our hypothesis is that a model classifying a document according to the occurence of a goal with an accuracy greater than 75\% is achievable based on automatically-labeled training data.\\
+More specifically, we want to examplify written football match reports from England's Premiere League to investigate whether the event of a goal can be mined for automatically. With the help of manually-found seeds, our hypothesis is that a model classifying a document according to the occurence of a goal with an accuracy of at least 75\% is achievable based on automatically-labeled training data.\\
 
 The research report is comprised of a description of the obtained data set [\ref{sec:structure}], our various preprocessing steps [\ref{sec:preproc}], the applied web data mining methods [\ref{sec:webmining}] as well as an evaluation of our results [\ref{sec:eval}].
 
@@ -187,6 +187,98 @@ Matze. Verbindung zur Vorlesung. Web mining techniken (classfication: svm, naive
 \section{Results and Evaluation}
 \label{sec:eval}
 Jochen. ZDF zu Test Set. Resultate von Precision und Recall der Classification. Diskussion. Positive und negative Einfluesse auf ergebnisse. Analog fuer ungelabelte Daten 
+
+
+\subsection{First Iteration: Na\"{i}ve Bayes}
+
+Accuracy: 64.58\%
+
+\begin{figure} [h!]
+\centering
+\begin{tabular}{ | l | l | l | l | }
+\hline
+	 & true neg & true pos & class precision \\ \hline
+	pred. neg & 411 & 190 & 68.39\% \\ \hline
+	pred. pos & 347 & 568 & 62.08\% \\ \hline
+	class recall & 54.22\% & 74.93\% &  \\ \hline
+\end{tabular}
+\caption{Performance of Na\"{i}ve Bayes classifier}
+\label{fig.svm}
+\end{figure}
+
+
+\subsection{Second Iteration: SVM}
+
+Accuracy: 70.59\%
+
+\begin{figure} [h!]
+\centering
+\begin{tabular}{ | l | l | l | l | }
+\hline
+	 & true neg & true pos & class precision \\ \hline
+	pred. neg & 654 & 342 & 65.66\% \\ \hline
+	pred. pos & 104 & 416 & 80.00\% \\ \hline
+	class recall & 86.28\% & 54.88\% &  \\ \hline
+\end{tabular}
+\caption{Performance of Support Vector Machine classifier}
+\label{fig.svm}
+\end{figure}
+
+
+\subsection{Third Iteration: Nearest-Neighbor}
+
+Accuracy: 75.00\%
+
+\begin{figure} [h!]
+\centering
+\begin{tabular}{ | l | l | l | l | }
+\hline
+	 & true neg & true pos & class precision \\ \hline
+	pred. neg & 469 & 90 & 83.90\% \\ \hline
+	pred. pos & 289 & 668 & 69.80\% \\ \hline
+	class recall & 61.87\% & 88.13\% &  \\ \hline
+\end{tabular}
+\caption{Performance of Nearest-Neighbor method}
+\label{fig.svm}
+\end{figure}
+
+
+\subsection{Fourth Iteration: Weighted Neareast Neighbor}
+
+Accuracy: 80.88\%
+
+\begin{figure} [h!]
+\centering
+\begin{tabular}{ | l | l | l | l | }
+\hline
+	 & true neg & true pos & class precision \\ \hline
+	pred. neg & 594 & 126 & 82.50\% \\ \hline
+	pred. pos & 164 & 632 & 79.40\% \\ \hline
+	class recall & 78.36\% & 83.38\% &  \\ \hline
+\end{tabular}
+\caption{Performance of Weighted Nearest-Neighbor method}
+\label{fig.svm}
+\end{figure}
+
+\subsection{Application on sample Report}
+
+
+\begin{figure} [h!]
+\centering
+\begin{tabular}{ | l | l | l | l | l | l | l | }
+\hline
+	Classifier & \multicolumn{2}{|c|}{Positive} &  \multicolumn{2}{|c|}{Negative} & Accuracy \\ \hline
+	& Precision & Recall & Precision & Recall & \  \\ \hline
+	Na\"{i}ve Bayes & 0.33 & 0.75 & 0.67 & 0.25 & 50.0\% \\ \hline
+	SVM & 0.33 & 0.75 & 0.67 & 0.25 & 50.0\% \\ \hline
+	KNN 50 Basic & 0.64 & 0.92 & 0.88 & 0.75 & 81.3\% \\ \hline
+	KNN 50  & 0.71 & 0.63 & 0.82 & 0.88 & 75.0\% \\ \hline
+\end{tabular}
+\caption{Application of different investigated classification models on a sample report with 24 sentences (8 positive, 12 negative)}
+\label{fig.appliedmodel}
+\end{figure}
+
+
 \section{Conclusion}
 Wrap-up.
 

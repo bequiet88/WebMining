@@ -185,7 +185,8 @@ The final preprocessing step became necessary due to GATE's restricted export ca
 \section{Actual Web Mining}
 \label{sec:webmining}
 After generating the input for our model we had to find a good model for our preprocessed data. Therefor we experimented with three different approaches: Na\"{i}ve Bayes, Support Vector Machine (SVM) and k-Nearest Neighbor (k-NN) classifier. \\ 
-The detailed results will be discussed in the following section. This section provides an overview of the structure of the processes. Each process starts with importing the data into the process and an operator to balance the number of inputs because there are more sentences containing no goal, then ones including goals. Following the balancing we used a so-called Validation operator in which the model was learned, applied to the data and the performance of our results were measured. \\
+The detailed results will be discussed in the following section. This section provides an overview of the structure of the processes. Each process starts with importing the data into the process.
+This operator includes three sub-operators, which split the text into words (Tokenize), then filter stop words and certain words like season, half and minutes. The last operator is configured manually. The next operator balances the number of inputs because there are more sentences containing no goal, then ones including goals. Following the balancing we used a so-called Validation operator in which the model was learned, applied to the data and the performance of our results were measured. \\
 \begin{itemize}
 \item Na\"{i}ve Bayes \\
 The first approach used a Na\"{i}ve Bayes classifier within the validation. "Bayesian classifiers assign the most likely class to a given example described by its feature vector. Learning such classifiers can be greatly simplified by assuming that features are independent given class[. ...] The success of naive Bayes in the presence of feature dependencies can be explained as follows: optimality in terms of zero-one loss (classification error) is not necessarily related to the quality of the fit to a probability distribution [... .] Rather an optimal classifier is obtained as long as both the actual and estimated distributions agree on the most probable class." \citep[p.1]{Rish2001} 
@@ -194,7 +195,7 @@ The process remained the same but we changed the model to be a SVM. "Support vec
 \item k-Nearest Neighbor (k-NN) \\
 The most successful attempt used the k-NN technique. "One of the oldest and simplest methods for pattern classification is the k-nearest neighbors (kNN) rule. The kNN rule classifies each unlabeled example by the majority label of its k-nearest neighbors in the training set. Despite its simplicity, the kNN rule often yields competitive results and in certain domains, when cleverly combined with prior knowledge, it has significantly advanced the state-of-the-art. By the very nature of its decision rule, the performance of kNN classification depends crucially on the way that distances are computed between different examples. When no prior knowledge is available, most implementations of kNN compute simple Euclidean distances (assuming the examples are represented as vector inputs). Unfortunately, Euclidean distances ignore any statistical regularities that might be estimated from a large training set of labeled examples." \citep[p.1]{Weinberger2006} We achieved the best results with a k of 50. 
 \end{itemize}
-Adding the operator "Weight by Information gain" and "Select by Weights" improved the results as well. The first operator assigns each element of our word vector a normalized value and the second operator selects elements with a weight that is higher then a determined threshold. In our case we achieved the best results using a threshold of 0.05. These two operators replaced the "Sample" operator and improved the results and the runtime of the process, due the size of the data has been reduced.
+Adding the operator "Weight by Information Gain" and "Select by Weights" improved the results as well. The first operator assigns each element of our word vector a normalized value and the second operator selects elements with a weight that is higher then a determined threshold. In our case we achieved the best results using a threshold of 0.05. These two operators replaced the "Sample" operator and improved the results and the runtime of the process, due the size of the data has been reduced.
 After the improvement was done, we wanted to use the trained model on unseen data. Therefor we added a "Process Documents"- and an "Apply Model"- operator after the Validation operator. The disadvantage of this was that the results were the sentences itself and the assigned class, so we had to evaluate the results by hand. 
 
 \section{Results and Evaluation}
@@ -296,9 +297,10 @@ As argued above, the high number of attributes lead to a too big positively-clas
 \label{fig.appliedmodel}
 \end{figure}
 
-
 \section{Conclusion}
-Wrap-up.
+The project paper outlined a way to detect goals in sentences of football match reports. It was possible to train different classifiers to achieve this goal. Based on the given data the kNN method provided the highest success rates. An interesting additional feature is the semi-automated generation of example sentences using GATE and Jape Grammar Rules. They provided the opportunity to generate many examples from some manually created rules.\\
+We experimented with three different classifiers - Na\"{i}ve Bayes, Support Vector Machine and k-Nearest Neighbor and different parameter settings. In the end we gained a precision of 76.5\% and a recall of 75.5\% for our kNN process with $k = 50$ using the  operators "Weight by Information gain" and "Select by Weights".\\
+Possible challenges for further research could be the determination if a goal is described in multiple sentences or multiple times within a report to conclude the exact result from a given report. Furthermore, you could think about adopting the discussed techniques to other languages, for example German or Spanish. 
 
 \bibliographystyle{apalike}
 \bibliography{bibliography}

@@ -199,7 +199,7 @@ At first, we attempted to perform the validation of classification models with t
 \subsection{First Iteration: Na\"{i}ve Bayes}
 \label{sec:nb}
 
-The measurements of the first iteration employing a Na\"{i}ve Bayes classifier are exposed to the reader in Figure~\ref{fig.nb}. Peculiarly is the high number of positive prediction. Naturally, this yields in a good positive class recall but takes a loss in the negative class recall. Also the positive class precision is not as strong as expected taking into account that the patterns for positive seeds are explicit and precise. The Na\"{i}ve Bayes classifier results in an accuracy of 64.58\%.
+The measurements of the first iteration employing a Na\"{i}ve Bayes classifier are exposed to the reader in Figure~\ref{fig.nb}. Peculiarly-high is the overall number of positive prediction. Naturally, this yields in a good positive class recall but takes a loss in the negative class recall. Also the positive class precision is not as strong as expected taking into account that the patterns for positive seeds are automically-labeled though explicitly and precisely defined. The Na\"{i}ve Bayes classifier results in an accuracy of 64.58\%.
 
 \begin{figure} [h!]
 \centering
@@ -218,7 +218,7 @@ The measurements of the first iteration employing a Na\"{i}ve Bayes classifier a
 \subsection{Second Iteration: SVM}
 \label{sec:svm}
 
-The performance of SVM's classfication validation is shown in Figure~\ref{fig.svm}. This result chart has considerably different characteristics from the previous one. As initially expected, the positive class precision is very strong. But by taking into account that the occurence of positively-predicted sentences is by far fewer than in the na\"{i}ve bayesian case, it is very obvious that the positive class recall suffers from the good class precision. Thus, the overall accuracy of 70.59\% is higher than in the first iteration, however, is not yet meeting the demand of our hypothesis.
+The performance of SVM's classfication validation is shown in Figure~\ref{fig.svm}. This result chart has considerably different characteristics from the previous one. As initially expected, the positive class precision is very strong. But by taking into account that the occurence of positively-predicted sentences is by far fewer than in the na\"{i}ve bayesian case, it is obvious that the positive class recall suffers from the good class precision. Thus, the overall accuracy of 70.59\% is higher than in the first iteration, however, is not yet meeting the demand of our hypothesis.
 
 \begin{figure} [h!]
 \centering
@@ -237,11 +237,7 @@ The performance of SVM's classfication validation is shown in Figure~\ref{fig.sv
 \subsection{Third Iteration: Nearest-Neighbor}
 \label{sec:knn}
 
-
-
-Strikingly-high is the class recall of positive sentences. However, the 50-NN method buys this figure with trading off its class precision which, in turn, is comparatively low.
-
-Accuracy: 75.00\%
+Figure~\ref{fig.knn} depicts the performance sheet of the 50-Nearest-Neighbor method. Strikingly-high is the class recall of positive sentences. As in the first iteration, the 50-NN method buys this figure with trading off its class precision which, in turn, is comparatively low. This high number of positive predictions can be explained through the vast amount of attributes. Those are equally-important for Nearest-Neighbor's distance measurement and, thus, even player names and words such as "bench", "inspiration", or "tense" indicate for the algorithm goals because a positive seed contained them at least once. Nevertheless, the basic application of 50-NN is the first model that holds the hypothesis of an accuracy of at least 75.00\%.
 
 \begin{figure} [h!]
 \centering
@@ -258,7 +254,7 @@ Accuracy: 75.00\%
 
 \subsection{Fourth Iteration: Weighted Nearest Neighbor}
 \label{sec:wknn}
-Accuracy: 80.88\%
+As argued above, the high number of attributes lead to a too big positively-classified sentence set. This is because we introduced the Rapidminer operators "Weight by Information Gain" and "Select by Weight" (see Chapter~\ref{sec.webmining}). We determined that a selection of words with a weight greater than 0.05 yields the best performance. Whereby the top-5 word indicating a goal are "scored", "net", "twice", "corner", and "volley". This restriction only supplies a relatively small number of 235 attributes to the classifier but yet resulting in our best classification model validation shown in Figure~\ref{fig.wknn}. The table unveils a more homogeneously-spread result of precision and recall figures where all are fluctuating around 80\%. This totals in our highest model accuracy of 80.88\%.
 
 \begin{figure} [h!]
 \centering
@@ -291,8 +287,6 @@ Accuracy: 80.88\%
 \label{fig.appliedmodel}
 \end{figure}
 
-
-Jochen. ZDF zu Test Set. Resultate von Precision und Recall der Classification. Diskussion. Positive und negative Einfluesse auf ergebnisse. 
 
 \section{Conclusion}
 Wrap-up.

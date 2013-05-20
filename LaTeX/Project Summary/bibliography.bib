@@ -222,6 +222,37 @@
   url = {http://www.jbiomedsem.com/content/1/1/9}
 }
 
+@ARTICLE{Rish2001,
+  author = {I. Rish},
+  title = {An empirical study of the naive Bayes classifier},
+  year = {2001},
+  pages = {5},
+  abstract = {The naive Bayes classifier greatly simplify learn- ing by assuming
+	that features are independent given class. Although independence
+	is generally a poor assumption, in practice naive Bayes often competes
+	well with more sophisticated classifiers.
+	
+	Our broad goal is to understand the data character- istics which affect
+	the performance of naive Bayes. Our approach uses Monte Carlo simulations
+	that al- low a systematic study of classification accuracy for several
+	classes of randomly generated prob- lems. We analyze the impact of
+	the distribution entropy on the classification error, showing that
+	low-entropy feature distributions yield good per- formance of naive
+	Bayes. We also demonstrate that naive Bayes works well for certain
+	nearly- functional feature dependencies, thus reaching its best performance
+	in two opposite cases: completely independent features (as expected)
+	and function- ally dependent features (which is surprising). An-
+	other surprising result is that the accuracy of naive Bayes is not
+	directly correlated with the degree of feature dependencies measured
+	as the class- conditional mutual information between the fea- tures.
+	Instead, a better predictor of naive Bayes ac- curacy is the amount
+	of information about the class that is lost because of the independence
+	assump- tion.},
+  owner = {matthiasr},
+  timestamp = {2013.05.19},
+  url = {http://www.cc.gatech.edu/home/isbell/classes/reading/papers/Rish.pdf}
+}
+
 @INPROCEEDINGS{Sekine2010,
   author = {Satoshi Sekine and Kapil Dalwani},
   title = {Ngram Search Engine with Patterns Combining Token, POS, Chunk and
@@ -245,6 +276,28 @@
   url = {www.oxfordhandbooks.com/view/10.1093/oxfordhb/9780199276349.001.0001/oxfordhb-9780199276349-e-11}
 }
 
+@INPROCEEDINGS{Weinberger2006,
+  author = {Kilian Q. Weinberger and John Blitzer and Lawrence K. Saul},
+  title = {Distance metric learning for large margin nearest neighbor classification},
+  booktitle = {In NIPS},
+  year = {2006},
+  publisher = {MIT Press},
+  abstract = {We show how to learn a Mahanalobis distance metric for k-nearest neighbor
+	(kNN) classification by semidefinite programming. The metric is trained
+	with the goal that the k-nearest neighbors always belong to the same
+	class while examples from different classes are separated by a large
+	margin. On seven data sets of varying size and difficulty, we find
+	that metrics trained in this way lead to significant improvements
+	in kNN classification—for example, achieving a test error rate of
+	1.3 % on the MNIST handwritten digits. As in support vector machines
+	(SVMs), the learning problem reduces to a convex optimization based
+	on the hinge loss. Unlike learning in SVMs, however, our framework
+	requires no modification or extension for problems in multiway (as
+	opposed to binary) classification.},
+  owner = {matthiasr},
+  timestamp = {2013.05.19}
+}
+
 @BOOK{Weiss2005,
   title = {Text Mining: Predictive Methods for Analyzing Unstructured Information},
   publisher = {Springer-Verlag New York},
@@ -255,6 +308,26 @@
   owner = {Office},
   timestamp = {2013.05.14},
   url = {http://books.google.de/books?id=NZteXd4qf9sC}
+}
+
+@PROCEEDINGS{Joachims1998,
+  title = {Machine Learning: ECML-98: Text categorization with Support Vector
+	Machines: Learning with many relevant features},
+  year = {1998},
+  editor = {Thorsten Joachims},
+  volume = {1398},
+  month = {April},
+  abstract = {This paper explores the use of Support Vector Machines (SVMs) for
+	learning text classifiers from examples. It analyzes the particular
+	properties of learning with text data and identifies why SVMs are
+	appropriate for this task. Empirical results support the theoretical
+	findings. SVMs achieve substantial improvements over the currently
+	best performing methods and behave robustly over a variety of different
+	learning tasks. Furthermore they are fully automatic, eliminating
+	the need for manual parameter tuning.},
+  doi = {10.1007/BFb0026683},
+  owner = {matthiasr},
+  timestamp = {2013.05.19}
 }
 
 @comment{jabref-meta: selector_review:}
@@ -272,6 +345,7 @@
 @comment{jabref-meta: groupstree:
 0 AllEntriesGroup:;
 1 ExplicitGroup:AI Semester Project - Football Prediction\;0\;;
-1 ExplicitGroup:Web Mining Student Project\;0\;Liu2011\;;
+1 ExplicitGroup:Web Mining Student Project\;0\;Joachims1998\;Liu2011\;
+Rish2001\;;
 }
 

@@ -127,10 +127,13 @@ The research report is comprised of a description of the obtained data set [\ref
 
 Since many NLP tools work best with English language, we would like to increase our chance of success by using football reports of the English Premier League. The BBC sports department offers match reports for every game of the currently ongoing season 2012/2013. The amount of reports is sufficient for the purpose of this project. A Premier League season consists of 38 matchdays with 10 games each. BBC provides one report per game. The BBC sports department is a good datasource because the reports are neutrally-written and have no preference for any team. Furthermore, the used language has got a higher level and should be, compared to spoken word, easier to analyse. \\
 
-The first step is gaterhing the data from the BBC homepage. Crawling the data will be described more detailed in the following section~\ref{sec:preproc} about preprocessing. These data was the input for the following classification process. Thus we wanted to classify each sentence wheter it contained a goal or not, we had to generate a sentence-wise input first.  The result of our crawling process was one HTML file per report. Like every HTML file, our results had a nested tree structure including some Javascript and CSS, as well. A problem occured was that the text fragments themselves contained HTML tags, for example references to other reports. For extracting the plain text from the rest of the HTML documents, we employed XPATH. Then we had to divide each football text into the sentences themselves. This on itself is a challenging task, because a punctuation mark could be a non-sufficient seperator, for example if we consider the name of the stadium "St. James Park". The extracted sentences will be a sufficient input for the further research.
+The first step is gaterhing the data from the BBC homepage. Crawling the data will be described more detailed in the following section~\ref{sec:preproc} about preprocessing. These data was the input for the following classification process. Thus we wanted to classify each sentence wheter it contained a goal or not, we had to generate a sentence-wise input first.  The result of our crawling process was one HTML file per report. Like every HTML file, our results had a nested tree structure including some Javascript and CSS, as well. A problem occured was that the text fragments themselves contained HTML tags, for example references to other reports. For extracting the plain text from the rest of the HTML documents, we employed XPATH. Then we had to divide each football text into the sentences themselves. This on itself is a challenging task, because a punctuation mark could be a non-sufficient seperator, for example if we consider the name of the stadium "St. James Park". The extracted sentences will be a sufficient input for the further research.\\
+
+As we started the research several matchdays before the end of the Premier League season, our data set comprises a total of 342 football match reports.
 
 \section{Preprocessing}
 \label{sec:preproc}
+\subsection{Defining Manual Patterns}
 As outlined in the previous section, the project started with gathering the data. We used RapidMiner to crawl the data for us. RapidMiner is an open source data mining tool developed by rapid-i.com. RapidMiner allows the user to define a so called process, which is a combination of certain operators. The operators are connected by defined in- and outputs and can be parameterized to perform specific actions. \\
 RapidMiner provides an operator to crawl the world wide web. BBC's Premier League result page is structured as follows: It has a main site from which every game report is liked. The reports are grouped by the day of the match. The first task of the crawler is to find the links to the game reports within the results page and then download each linked page into a seperate HTML file. Then the text has to be extracted from the HTML files. Therefor we use RapidMiner as well. The RapidMiner process takes all HTML files and extracts the plain text. This is achieved with the Cut Document-operator and an XPath-query. The extracted text is then written to one file for all reports because the Write as Text-operator can not write into multiple files. \\ 
 
@@ -148,6 +151,8 @@ The \hyperlink{http://nlp.stanford.edu/software/CRF-NER.shtml}{Stanford NLP Grou
 \label{fig.manualpattern}
 \end{figure}
 
+\subsection{Possibilities of Automated Pattern Matching}
+\label{sec:automatch}
 As the next preprocessing step, the manual patterns had to be applied on our entire corpus of football match reports in order to find more positive training data for the subsequent classification in an automated way. For this task a search engine capable of querying for n-grams consisting of POS tags, recognized named entities, free tokens, and an arbitrary number of wildcards is needed. A n-gram is a sequence containing n literals.\\
 A comprehense search engine for n-grams has been developed by \citeauthor*{Sekine2010} \citeyearpar{Sekine2010}. Their published work depicts a search engine capable of querying up to 7-grams with POS tags, named entities, and free tokens. The user interface is conveniently web-based. However, their search engine is not publicly accesible and restricted to Wikipedia articles. Moreover,  their solutions lacks a support of an arbitrary number of wildcards.\\
 
@@ -159,9 +164,8 @@ Apart from standard components, GATE exposes interfaces to extend its processing
 \begin{lstlisting}[frame=single]
 Rule: Goal3
 (
-  ({Person.rule == PersonFinal}|
-   {Lookup.majorType == country_adj}|
-   {Token.category == NNP})
+  ({Person.rule == PersonFinal}|{Token.category == NNP}
+   |{Lookup.majorType == country_adj})
   {Token.category == POS}
   ({Token.length > 1})*
   ({Token.category == NN}|{Token.category == NNS})
@@ -195,12 +199,16 @@ After the improvement was done, we wanted to use the trained model on unseen dat
 
 \section{Results and Evaluation}
 \label{sec:eval}
-Jochen. ZDF zu Test Set. Resultate von Precision und Recall der Classification. Diskussion. Positive und negative Einfluesse auf ergebnisse. Analog fuer ungelabelte Daten 
 
+The results shown in this section were calculated on the data set introduced in Chapter~\ref{sec:structure}. After the preprocessing steps the football match reports were splitted into 9,211 sentences, each of which is separetly store as text file. Out of this corpus, the 14 JAPE grammer rules (see Chapter~\ref{sec:automatch}) were able to match and thus extract 758 sentences containing a goal in an unsupervised manner. Given an even distribution of negative and positive seeds for classificatoin, the following performance measurements base on a total of 1,516 input sentences. The negative seeds were taken randomly from the entire corpus excluding those sentences marked as positive.\\
+At first, we attempted to perform the validation of classification models with the complete sentences as attributes. Thus, the classifiers employed 1,498 attributes. However, it turned out to be not a viable solution as none of the classifiers were able to predict a single positive sentence correctly. From these findings we derive that entire sentences are not similar enough to one another to serve as attributes for classification. Hence, the measurements in Chapters~\ref{sec:nb} to~\ref{sec:knn} were conducted with an additional sentence tokeniser and stop-word filter returning now 3,624 word-level attributes for classification.
+
+%From this the implication can be drawn
 
 \subsection{First Iteration: Na\"{i}ve Bayes}
+\label{sec:nb}
 
-Accuracy: 64.58\%
+The measurements of the first iteration employing a Na\"{i}ve Bayes classifier are exposed to the reader in Figure~\ref{fig.nb}. Peculiarly is the high number of positive prediction. Naturally, this yields in a good positive class recall but takes a loss in the negative class recall. Also the positive class precision is not as strong as expected taking into account that the patterns for positive seeds are explicit and precise. The Na\"{i}ve Bayes classifier results in an accuracy of 64.58\%.
 
 \begin{figure} [h!]
 \centering
@@ -212,13 +220,14 @@ Accuracy: 64.58\%
 	class recall & 54.22\% & 74.93\% &  \\ \hline
 \end{tabular}
 \caption{Performance of Na\"{i}ve Bayes classifier}
-\label{fig.svm}
+\label{fig.nb}
 \end{figure}
 
 
 \subsection{Second Iteration: SVM}
+\label{sec:svm}
 
-Accuracy: 70.59\%
+The performance of SVM's classfication validation is shown in Figure~\ref{fig.svm}. This result chart has considerably different characteristics from the previous one. As initially expected, the positive class precision is very strong. But by taking into account that the occurence of positively-predicted sentences is by far fewer than in the na\"{i}ve bayesian case, it is very obvious that the positive class recall suffers from the good class precision. Thus, the overall accuracy of 70.59\% is higher than in the first iteration, however, is not yet meeting the demand of our hypothesis.
 
 \begin{figure} [h!]
 \centering
@@ -235,6 +244,11 @@ Accuracy: 70.59\%
 
 
 \subsection{Third Iteration: Nearest-Neighbor}
+\label{sec:knn}
+
+
+
+Strikingly-high is the class recall of positive sentences. However, the 50-NN method buys this figure with trading off its class precision which, in turn, is comparatively low.
 
 Accuracy: 75.00\%
 
@@ -248,12 +262,11 @@ Accuracy: 75.00\%
 	class recall & 61.87\% & 88.13\% &  \\ \hline
 \end{tabular}
 \caption{Performance of Nearest-Neighbor method}
-\label{fig.svm}
+\label{fig.knn}
 \end{figure}
 
-
-\subsection{Fourth Iteration: Weighted Neareast Neighbor}
-
+\subsection{Fourth Iteration: Weighted Nearest Neighbor}
+\label{sec:wknn}
 Accuracy: 80.88\%
 
 \begin{figure} [h!]
@@ -266,7 +279,7 @@ Accuracy: 80.88\%
 	class recall & 78.36\% & 83.38\% &  \\ \hline
 \end{tabular}
 \caption{Performance of Weighted Nearest-Neighbor method}
-\label{fig.svm}
+\label{fig.wknn}
 \end{figure}
 
 \subsection{Application on sample Report}
@@ -287,6 +300,8 @@ Accuracy: 80.88\%
 \label{fig.appliedmodel}
 \end{figure}
 
+
+Jochen. ZDF zu Test Set. Resultate von Precision und Recall der Classification. Diskussion. Positive und negative Einfluesse auf ergebnisse. 
 
 \section{Conclusion}
 Wrap-up.

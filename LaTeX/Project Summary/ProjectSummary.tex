@@ -118,7 +118,7 @@ On the one hand, the blogosphere puts the right of speech on an entirely new lev
 
 Due these plentiful resasons, the domains of text mining and Information Extraction (IE) have drawn their attention to us. Both domains tied together enable the automatic identification of selected types of entities, relations, or events in free text \citep[p.545]{Grishman2005}. Our research interest and also project goal is two-fold. Firstly, we want to find and apply patterns extracting a particular event from an unknown textual source. Secondly, the robustness of the patterns found should be assessed by classifying an unlabeled source. According to \citeauthor*{Weiss2005} \citeyearpar{Weiss2005} the first task can be referred to as Information Retrievel because we provide "clues" that determine the matching documents. They also argue that the second task is considered as a Document Classification one.\\
 
-More specifically, we want to examplify written football match reports from England's Premiere League to investigate whether the event of a goal can be mined for automatically. With the help of manually-found seeds, our hypothesis is that a model classifying a document according to the occurence of a goal with an accuracy of at least 75\% is achievable based on automatically-labeled training data.\\
+More specifically, we want to examplify written football match reports from England's Premiere League to investigate whether the event of a goal can be mined for automatically. With the help of manually-found seeds, our hypothesis is that a model classifying a document according to the occurence of a goal with an accuracy of at least 75\% is achievable based on automatically-labeled training data. Moreover, the model found should also work on a sample unkown and unlabeled match report.\\
 
 The research report is comprised of a description of the obtained data set [\ref{sec:structure}], our various preprocessing steps [\ref{sec:preproc}], the applied web data mining methods [\ref{sec:webmining}] as well as an evaluation of our results [\ref{sec:eval}].
 
@@ -194,14 +194,14 @@ The process remained the same but we changed the model to be a SVM. "Support vec
 \item k-Nearest Neighbor (k-NN) \\
 The most successfull attempt used the k-NN technique. "One of the oldest and simplest methods for pattern classification is the k-nearest neighbors (kNN) rule. The kNN rule classifies each unlabeled example by the majority label of its k-nearest neighbors in the training set. Despite its simplicity, the kNN rule often yields competitive results and in certain domains, when cleverly combined with prior knowledge, it has significantly advanced the state-of-the-art. By the very nature of its decision rule, the performance of kNN classification depends crucially on the way that distances are computed between different examples. When no prior knowledge is available, most implementations of kNN compute simple Euclidean distances (assuming the ex- amples are represented as vector inputs). Unfortunately, Euclidean distances ignore any statistical regularities that might be estimated from a large training set of labeled examples." \citep[p.1]{Weinberger2006} We achieved the best results with a k of 50. 
 \end{itemize}
-Adding the operator "Weight by Information gain" and "Select by Weights" improved the results as well. The first operator assignes each element of our word vector a normalized value and the second operator selects elements with a weight that is higher then a determined threshold. In our case we achieved the best results using a threshold of 0.05. This two operators replaced the "Sample" operator and improved the results and the runtime of the process, due the size of the data has been reduced.
+Adding the operator "Weight by Information Gain" and "Select by Weights" improved the results as well. The first operator assignes each element of our word vector a normalized value and the second operator selects elements with a weight that is higher then a determined threshold. In our case we achieved the best results using a threshold of 0.05. This two operators replaced the "Sample" operator and improved the results and the runtime of the process, due the size of the data has been reduced.
 After the improvement was done, we wanted to use the trained model on unseen data. Therefor we added a "Process Documents"- and an "Apply Model"- operator after the Validation operator. The disadvantage of this was that the results were the sentences itself and the assigned class, so we had to evaluate the results by hand. 
 
 \section{Results and Evaluation}
 \label{sec:eval}
 
-The results shown in this section were calculated on the data set introduced in Chapter~\ref{sec:structure}. After the preprocessing steps the football match reports were splitted into 9,211 sentences, each of which is separetly store as text file. Out of this corpus, the 14 JAPE grammer rules (see Chapter~\ref{sec:automatch}) were able to match and thus extract 758 sentences containing a goal in an unsupervised manner. Given an even distribution of negative and positive seeds for classificatoin, the following performance measurements base on a total of 1,516 input sentences. The negative seeds were taken randomly from the entire corpus excluding those sentences marked as positive.\\
-At first, we attempted to perform the validation of classification models with the complete sentences as attributes. Thus, the classifiers employed 1,498 attributes. However, it turned out to be not a viable solution as none of the classifiers were able to predict a single positive sentence correctly. From these findings we derive that entire sentences are not similar enough to one another to serve as attributes for classification. Hence, the measurements in Chapters~\ref{sec:nb} to~\ref{sec:knn} were conducted with an additional sentence tokeniser and stop-word filter returning now 3,624 word-level attributes for classification.
+The results shown in this section were calculated on the data set introduced in Section~\ref{sec:structure}. After the preprocessing steps the football match reports were splitted into 9,211 sentences, each of which is separetly store as text file. Out of this corpus, the 14 JAPE grammer rules (see Subsection~\ref{sec:automatch}) were able to match and thus extract 758 sentences containing a goal in an unsupervised manner. Given an even distribution of negative and positive seeds for classificatoin, the following performance measurements base on a total of 1,516 input sentences. The negative seeds were taken randomly from the entire corpus excluding those sentences marked as positive.\\
+At first, we attempted to perform the validation of classification models with the complete sentences as attributes. Thus, the classifiers employed 1,498 attributes. However, it turned out to be not a viable solution as none of the classifiers were able to predict a single positive sentence correctly. From these findings we derive that entire sentences are not similar enough to one another to serve as attributes for classification. Hence, the measurements in Subsections~\ref{sec:nb} to~\ref{sec:knn} were conducted with an additional sentence tokeniser and stop-word filter returning now 3,624 word-level attributes for classification.
 
 %From this the implication can be drawn
 
@@ -263,7 +263,7 @@ Figure~\ref{fig.knn} depicts the performance sheet of the 50-Nearest-Neighbor me
 
 \subsection{Fourth Iteration: Weighted Nearest Neighbor}
 \label{sec:wknn}
-As argued above, the high number of attributes lead to a too big positively-classified sentence set. This is because we introduced the Rapidminer operators "Weight by Information Gain" and "Select by Weight" (see Chapter~\ref{sec.webmining}). We determined that a selection of words with a weight greater than 0.05 yields the best performance. Whereby the top-5 word indicating a goal are "scored", "net", "twice", "corner", and "volley". This restriction only supplies a relatively small number of 235 attributes to the classifier but yet resulting in our best classification model validation shown in Figure~\ref{fig.wknn}. The table unveils a more homogeneously-spread result of precision and recall figures where all are fluctuating around 80\%. This totals in our highest model accuracy of 80.88\%.
+As argued above, the high number of attributes lead to a too big positively-classified sentence set. This is because we introduced the Rapidminer operators "Weight by Information Gain" and "Select by Weight" (see Section~\ref{sec:webmining}). We determined that a selection of words with a weight greater than 0.05 yields the best performance. Whereby the top-5 word indicating a goal are "scored", "net", "twice", "corner", and "volley". This restriction only supplies a relatively small number of 235 attributes to the classifier but yet resulting in our best classification model validation shown in Figure~\ref{fig.wknn}. The table unveils a more homogeneously-spread result of precision and recall figures where all are fluctuating around 80\%. This totals in our highest model accuracy of 80.88\%.
 
 \begin{figure} [h!]
 \centering
@@ -278,7 +278,9 @@ As argued above, the high number of attributes lead to a too big positively-clas
 \label{fig.wknn}
 \end{figure}
 
-\subsection{Application on sample Report}
+\subsection{Application on sample Match Report}
+
+The findings of the performance measurement in the previous subsections were for training and model validation purposes. To achieve the project goal, the models found are applied on an randomly-chosen, unknown, and unlabeled text, namely the match report of Chelsea vs. Sunderland on April, 7th 2013. We manually counted 24 sentences in the report where eight ones indicate a goal eventhough the game was only a 2:1 victory for Chelsea. Figure~\ref{fig.appliedmodel} draws the resulting measures for all applied classifiers. As found in the validation steps, the Nearest-Neighbor methods yield again the highest accuracies.
 
 
 \begin{figure} [h!]
@@ -289,12 +291,23 @@ As argued above, the high number of attributes lead to a too big positively-clas
 	& Precision & Recall & Precision & Recall & \  \\ \hline
 	Na\"{i}ve Bayes & 0.33 & 0.75 & 0.67 & 0.25 & 50.0\% \\ \hline
 	SVM & 0.33 & 0.75 & 0.67 & 0.25 & 50.0\% \\ \hline
-	KNN 50 Basic & 0.64 & 0.92 & 0.88 & 0.75 & 81.3\% \\ \hline
-	KNN 50  & 0.71 & 0.63 & 0.82 & 0.88 & 75.0\% \\ \hline
+	50-NN Basic & 0.64 & 0.92 & 0.88 & 0.75 & 81.3\% \\ \hline
+	50-NN Weighted  & 0.71 & 0.63 & 0.82 & 0.88 & 75.0\% \\ \hline
 \end{tabular}
 \caption{Application of different investigated classification models on a sample report with 24 sentences (8 positive, 12 negative)}
 \label{fig.appliedmodel}
 \end{figure}
+
+Figure~\ref{fig.plot} depicts a plot of this pratical case. The best possible score is in the upper-right corner with a precision of 1 and also a recall of 1. Each classifier has got two data points - a positive and negative one. The best overall plot is scored by 50-NN Weighted negative. However, the best combined plot and, thus, the best accuracy for this specific match report scores the 50-NN Basic model. Yet this proves that our hypothesis holds also on unknown and unlabeld data. 
+
+
+\begin{figure} [h!]
+\centering
+\includegraphics[width=0.7\textwidth]{precRecall.PNG}
+\caption{Plot of classification models applied on a sample report (green = positive, red = negative)}
+\label{fig.plot}
+\end{figure}
+
 
 
 \section{Conclusion}
